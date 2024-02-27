@@ -1,0 +1,42 @@
+nav.NavBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 12px;
+    background-color: white;
+    box-shadow: 0px 2px 3px rgb(196, 196, 196);
+}
+
+div.divBtns {
+    display: flex;
+}
+
+div.divBtns a {
+    text-decoration: none;
+    margin: 0px 5px;
+    padding: 5px 20px;
+    color: black;
+    transition: all 0.1s;
+}
+
+div.divBtns a:hover {
+    text-decoration: none;
+    color: #ff8800;
+}
+
+img.LogoFrub {
+    height: 45px;
+    transition: all 0.3s;
+}
+
+img.LogoFrub:hover {
+    transform: scale(1.20);
+}
+
+div.infoKanNav {
+    text-align: center;
+}
+
+.infoKanNavTexto {
+    margin: 5px;
+}

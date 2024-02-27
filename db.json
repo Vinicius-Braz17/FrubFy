@@ -1,0 +1,249 @@
+{
+  "KanBans": [
+    {
+      "data": "2023-02-03",
+      "rota": "/AD1",
+      "rotaSaude": "/S1",
+      "id": 1
+    }
+  ],
+  "cargos": [
+    {
+      "nome": "",
+      "departamento": "",
+      "id": 0
+    },
+    {
+      "nome": "WAREHOUSE ASSOCIATE I 1PL",
+      "departamento": "WAREHOUSE",
+      "id": 1
+    },
+    {
+      "nome": "WAREHOUSE ASSOCIATE II 1PL",
+      "departamento": "WAREHOUSE",
+      "id": 2
+    },
+    {
+      "nome": "WAREHOUSE ASSOCIATE III 1PL",
+      "departamento": "WAREHOUSE",
+      "id": 3
+    },
+    {
+      "nome": "PAYROOL & HIRING APPRENDICE",
+      "departamento": "PAYROOL & HIRING",
+      "id": 4
+    },
+    {
+      "nome": "PAYROOL & HIRING ANALYST I",
+      "departamento": "PAYROOL & HIRING",
+      "id": 5
+    },
+    {
+      "nome": "PAYROOL & HIRING ANALYST II",
+      "departamento": "PAYROOL & HIRING",
+      "id": 6
+    },
+    {
+      "nome": "PAYROOL & HIRING ANALYST III",
+      "departamento": "PAYROOL & HIRING",
+      "id": 7
+    },
+    {
+      "nome": "PAYROOL & HIRING MANAGER",
+      "departamento": "PAYROOL & HIRING",
+      "id": 8
+    },
+    {
+      "nome": "PAYROLL & HIRING LEADER",
+      "departamento": "PAYROOL & HIRING",
+      "id": 9
+    },
+    {
+      "nome": "SALES HUNTER ASSOCIATE",
+      "departamento": "VENDAS HUNTER",
+      "id": 10
+    },
+    {
+      "nome": "SALES FARMER ASSOCIATE",
+      "departamento": "VENDAS FARMER",
+      "id": 11
+    },
+    {
+      "nome": "SALES KAM ASSOCIATE",
+      "departamento": "SALES KAM",
+      "id": 12
+    },
+    {
+      "nome": "SALES KAM ADMIN ASSOCIATE",
+      "departamento": "SALES KAM ADMIN",
+      "id": 13
+    },
+    {
+      "nome": "SALES HRBP",
+      "departamento": "HRBPs SALES",
+      "id": 14
+    },
+    {
+      "nome": "WAREHOUSE HRBP",
+      "departamento": "HRBPs OPS",
+      "id": 15
+    },
+    {
+      "nome": "PROCUREMENT ASSOCIATE I",
+      "departamento": "PROCUREMENT",
+      "id": 16
+    },
+    {
+      "nome": "PROCUREMENT ADMIN ASSOCIATE I",
+      "departamento": "PROCUREMENT",
+      "id": 17
+    }
+  ],
+  "filiais": [
+    {
+      "nome": "",
+      "id": 0
+    },
+    {
+      "nome": "MATRIZ",
+      "id": 1
+    },
+    {
+      "nome": "GUARULHOS",
+      "id": 2
+    },
+    {
+      "nome": "SANTO ANDRE",
+      "id": 3
+    },
+    {
+      "nome": "CAMPINAS",
+      "id": 4
+    },
+    {
+      "nome": "BELO HORIZONTE/MG",
+      "id": 5
+    },
+    {
+      "nome": "CURITIBA/PR",
+      "id": 6
+    },
+    {
+      "nome": "VLP",
+      "id": 7
+    },
+    {
+      "nome": "3PL/MAKITA",
+      "id": 8
+    },
+    {
+      "nome": "3PL/ARFRIO",
+      "id": 9
+    },
+    {
+      "nome": "3PL/TREMEBÉ",
+      "id": 10
+    }
+  ],
+  "AD1": [
+    {
+      "nome": "VINICINH",
+      "telefone": "11997540828",
+      "departamento": "VENDAS HUNTER",
+      "funcao": "SALES HUNTER ASSOCIATE",
+      "salario": "1970",
+      "diaInicio": "Segunda-feira",
+      "diaFim": "Sexta-feira",
+      "escalaInicio": "18:00",
+      "escalaFim": "08:00",
+      "filial": "MATRIZ",
+      "fase": 1,
+      "id": 1
+    },
+    {
+      "nome": "LINDAO",
+      "telefone": "115151",
+      "departamento": "WAREHOUSE",
+      "funcao": "WAREHOUSE ASSOCIATE I 1PL",
+      "salario": "1500",
+      "diaInicio": "Segunda-feira",
+      "diaFim": "Sábado",
+      "escalaInicio": "20:00",
+      "escalaFim": "12:00",
+      "filial": "SANTO ANDRE",
+      "fase": 3,
+      "id": 2
+    }
+  ],
+  "S1": [
+    {
+      "nome": "LINDAO",
+      "telefone": "115151",
+      "departamento": "WAREHOUSE",
+      "funcao": "WAREHOUSE ASSOCIATE I 1PL",
+      "salario": "1500",
+      "diaInicio": "Segunda-feira",
+      "diaFim": "Sábado",
+      "escalaInicio": "20:00",
+      "escalaFim": "12:00",
+      "filial": "SANTO ANDRE",
+      "fase": 5,
+      "id": 2,
+      "dataExame": "2024-02-28",
+      "horarioExame": "08:00",
+      "clinica": "frubana galpap"
+    }
+  ],
+  "AD2": [],
+  "S2": [],
+  "AD3": [],
+  "S3": [],
+  "AD4": [],
+  "S4": [],
+  "AD5": [],
+  "S5": [],
+  "AD6": [],
+  "S6": [],
+  "AD7": [],
+  "S7": [],
+  "AD8": [],
+  "S8": [],
+  "AD9": [],
+  "S9": [],
+  "AD10": [],
+  "S10": [],
+  "AD11": [],
+  "S11": [],
+  "AD12": [],
+  "S12": [],
+  "AD13": [],
+  "S13": [],
+  "AD14": [],
+  "S14": [],
+  "AD15": [],
+  "S15": [],
+  "AD16": [],
+  "S16": [],
+  "AD17": [],
+  "S17": [],
+  "AD18": [],
+  "S18": [],
+  "AD19": [],
+  "S19": [],
+  "AD20": [],
+  "S20": [],
+  "AD21": [],
+  "S21": [],
+  "AD22": [],
+  "S22": [],
+  "AD23": [],
+  "S23": [],
+  "AD24": [],
+  "S24": [],
+  "AD25": [],
+  "S25": [],
+  "AD26": [],
+  "S26": [],
+  "AD27": [],
+  "S27": []
+}

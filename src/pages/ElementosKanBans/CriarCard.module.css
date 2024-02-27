@@ -1,0 +1,116 @@
+.criarCard {
+    position: absolute;
+    top: 0%;
+    left: 30%;
+    margin: 0 auto;
+    margin-top: 2%;
+    width: 40%;
+    height: 550px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 0px 30px 9999px rgb(0,0,0,0.7);
+    border: 1px solid rgb(180, 180, 180);
+}
+
+.criarCard h1 {
+    background-color: rgb(220, 177, 255);
+    border-bottom: solid 2px ;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin: 0px;
+    padding: 10px 0;
+    font-size: 35px;
+    border-radius: 20px 20px 0 0;
+    text-align: center
+}
+
+#botaoX {
+    text-align: center;
+    position: absolute;
+    top: 12px;
+    right: 17px;
+    border-radius: 100%;
+    padding: 3px;
+    width: 35px;
+    height: 35px;
+    font-size: 25px;
+    background-color: rgb(220, 177, 255);
+    transition: all 0.3s;
+    border: none
+}
+
+#botaoX:hover {
+    background-color: rgb(255, 52, 52);
+}
+
+.criarCard form {
+    text-align: center;
+    box-sizing: border-box;
+    padding: 5px 10%;
+    width: 100%;
+    height: 88.5%;
+    overflow-y: scroll;
+}
+
+.criarCard form div {
+    margin: 25px 0px;
+}
+
+.criarCard form div p {
+    margin: 5px auto;
+    width: 357px;
+    text-align: left;
+    font-size: 17px;
+
+}
+
+.criarCard form div input{
+    border: 1px solid rgb(71, 25, 109);
+    margin: 0;
+    width: 350px;
+    height: 30px;
+    font-size: 17px;
+    border-radius: 5px; 
+}
+
+.criarCard form div select{
+    border: 1px solid rgb(71, 25, 109);
+    margin: 0;
+    width: 355px;
+    height: 30px;
+    font-size: 17px;
+    border-radius: 5px; 
+}
+
+.departamento {
+    background-color: rgb(226, 226, 226);
+}
+
+.criarCard form div .escala {
+    width: 37.5%;
+    margin: 0px 10px;
+}
+
+.criarCard form div .escalaDia {
+    width: 38.6%;
+    margin: 0px 12px;
+}
+
+.criarCard form .divEscala {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.criarCard form .criarCardButtonSub button {
+    height: 30px;
+    width: 140px;
+    border: 2px solid rgb(199, 130, 255); 
+    background-color: white;
+    transition: all 0.2s;
+}
+
+.criarCard form .criarCardButtonSub button:hover {
+    background-color: rgb(204, 141, 255);
+    color: white;
+}

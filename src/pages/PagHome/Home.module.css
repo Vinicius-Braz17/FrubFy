@@ -1,0 +1,68 @@
+.painelKanBans .PainelInterno {
+    text-align:center;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: row-reverse;
+    max-height: 510px;
+    width: 100%;
+    margin-top: 15px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: fit-content;
+    border-radius: 8px 8px 0 0;
+}
+
+.painelKanBans {
+    border: 1px solid rgb(131, 131, 131);
+    box-shadow: 1px 1px 8px rgb(107, 107, 107);
+    margin: 25px auto;
+    width: 89%;
+    text-align:center;
+    display: flex;
+    flex-wrap: wrap;
+    background-image: linear-gradient(to bottom right, white, rgb(255, 212, 69));
+    border-radius: 8px 8px 0 0;
+}
+
+.painelKanBans .menuPainel {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0px 0px;
+    padding-right: 45%;
+    border: 2px solid rgb(192, 192, 192);
+    background-color: #f1f1f1;
+    border-radius: 8px 8px 0 0;
+}
+
+.painelKanBans .menuPainel button{
+    height: 65px;
+    width: 130px;
+    font-size: 16px;
+    margin: 0 0;
+    border-radius: 0;
+    border: 1px solid rgb(192, 192, 192);
+    background-image: linear-gradient(white, rgb(216, 216, 216));
+    cursor: pointer;
+    border-radius: 8px 0px 0 0;
+}
+
+.painelKanBans .menuPainel button:active {
+    background-image: linear-gradient(to top, white, rgb(216, 216, 216));
+}
+
+.painelKanBans .menuPainel h2 {
+    font-size: 40px;
+    margin: 10px 0;;
+}
+
+.painelKanBans div input {
+    height: 20px;
+    margin-right: 30px;
+}
+
+.lin {
+    text-decoration: none;
+}

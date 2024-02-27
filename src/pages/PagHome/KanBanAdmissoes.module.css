@@ -1,0 +1,27 @@
+.CartaoKB {
+    margin: 15px;
+    height: 245px;
+    width: 245px;
+    text-align: center;
+    border: 1px solid black;
+    transition: all 0.15s;
+    box-sizing: border-box;
+    padding: 7% 0;
+    background-color: white;
+}
+
+.CartaoKB:hover {
+    transform: scale(1.02);
+}
+
+.CartaoKB p {
+    color: black;
+    font-size: 22px;
+    text-decoration: none;
+    border: 1px solid black;
+    margin: 10px 0px;
+}
+
+.CartaoKB img {
+    height: 70px;
+}

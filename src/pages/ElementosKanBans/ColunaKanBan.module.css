@@ -1,0 +1,54 @@
+.colKB {
+    height: 512px;
+    width: 305px;
+    border: 1px solid rgb(185, 185, 185);
+    margin: 5px 4px;
+    background-color: rgb(244, 230, 255);
+    border-radius: 7px;
+    flex-shrink: 0;
+}
+
+#colK1 {
+    background-color: rgb(255, 199, 199);
+}
+
+#colK2 {
+    background-color: rgb(235, 213, 255)
+}
+
+.colKB .NomeCol {
+    border: 1px solid rgb(163, 163, 163);
+    box-shadow: 0px 2px 2px rgb(143, 143, 143);;
+    height: 30px;
+    border-radius: 7px 7px 0 0;
+    margin: 0;
+    text-align: center;
+    font-size: 19px;
+    background-color: rgb(222, 187, 255);
+}
+
+.colKB button {
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.colKB button:hover {
+    background-color: rgb(228, 228, 228);
+}
+
+.colKB div {
+    box-sizing: border-box;
+    margin-top: 3px;
+    padding: 10px;
+    height: fit-content;
+    max-height: 93.2%;
+    z-index: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.colKB div p {
+    box-shadow: none;
+}
