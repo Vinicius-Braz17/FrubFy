@@ -13,9 +13,8 @@
 }
 
 .card:hover {
-    position: relative;
-    bottom: 2px;
-    box-shadow: 2px 2px 2px rgb(153, 153, 153);
+    transform: translateY(-3px);
+    box-shadow: 4px 4px 5px rgb(153, 153, 153);
 }
 
 .card p {

@@ -5,6 +5,12 @@
       "rota": "/AD1",
       "rotaSaude": "/S1",
       "id": 1
+    },
+    {
+      "data": "2004-02-03",
+      "rota": "/AD2",
+      "rotaSaude": "/S2",
+      "id": 2
     }
   ],
   "cargos": [
@@ -147,53 +153,35 @@
   ],
   "AD1": [
     {
-      "nome": "VINICINH",
-      "telefone": "11997540828",
-      "departamento": "VENDAS HUNTER",
-      "funcao": "SALES HUNTER ASSOCIATE",
-      "salario": "1970",
-      "diaInicio": "Segunda-feira",
+      "nome": "DS",
+      "telefone": "dsad",
+      "funcao": "Jovem aprendiz administrativo",
+      "departamento": "RH",
+      "salario": "913",
+      "diaInicio": "Terça-feira",
       "diaFim": "Sexta-feira",
-      "escalaInicio": "18:00",
-      "escalaFim": "08:00",
-      "filial": "MATRIZ",
+      "escalaInicio": "09:00",
+      "escalaFim": "15:00",
+      "filial": "SANTO ANDRE",
       "fase": 1,
       "id": 1
     },
     {
-      "nome": "LINDAO",
-      "telefone": "115151",
-      "departamento": "WAREHOUSE",
-      "funcao": "WAREHOUSE ASSOCIATE I 1PL",
-      "salario": "1500",
+      "nome": "KATIA SILVA ZANINNI",
+      "telefone": "48484488",
+      "funcao": "Técnico de segurança do trabalho Sr.",
+      "departamento": "Segurança do trabalho",
+      "salario": "5000",
       "diaInicio": "Segunda-feira",
-      "diaFim": "Sábado",
-      "escalaInicio": "20:00",
-      "escalaFim": "12:00",
-      "filial": "SANTO ANDRE",
-      "fase": 3,
+      "diaFim": "Quinta-feira",
+      "escalaInicio": "09:00",
+      "escalaFim": "18:00",
+      "filial": "MATRIZ",
+      "fase": 1,
       "id": 2
     }
   ],
-  "S1": [
-    {
-      "nome": "LINDAO",
-      "telefone": "115151",
-      "departamento": "WAREHOUSE",
-      "funcao": "WAREHOUSE ASSOCIATE I 1PL",
-      "salario": "1500",
-      "diaInicio": "Segunda-feira",
-      "diaFim": "Sábado",
-      "escalaInicio": "20:00",
-      "escalaFim": "12:00",
-      "filial": "SANTO ANDRE",
-      "fase": 5,
-      "id": 2,
-      "dataExame": "2024-02-28",
-      "horarioExame": "08:00",
-      "clinica": "frubana galpap"
-    }
-  ],
+  "S1": [],
   "AD2": [],
   "S2": [],
   "AD3": [],

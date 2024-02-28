@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 function CriarCard({ fecharPainel, BD, Ids }) {
   const dias = [
     {
-        dia: '',
-        id: 0
+      dia: "",
+      id: 0,
     },
     {
       dia: "Segunda-feira",
@@ -41,7 +41,7 @@ function CriarCard({ fecharPainel, BD, Ids }) {
   const [filiais, setFiliais] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4500/cargos", {
+    fetch("http://localhost:8800/CARGOS", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -54,8 +54,10 @@ function CriarCard({ fecharPainel, BD, Ids }) {
       .catch((err) => console.log(err));
   }, []);
 
+  console.log(cargos);
+
   useEffect(() => {
-    fetch("http://localhost:4500/filiais", {
+    fetch("http://localhost:8800/FILIAIS", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -72,9 +74,9 @@ function CriarCard({ fecharPainel, BD, Ids }) {
     var opcaoSelecionada = document.querySelector("#funcao").value;
 
     for (let i = 0; i < cargos.length; i++) {
-      if (opcaoSelecionada === cargos[i].nome) {
-        document.querySelector("#departamento").value = cargos[i].departamento;
-        setC({ ...c, departamento: cargos[i].departamento });
+      if (opcaoSelecionada === cargos[i].NOME_CARGO) {
+        document.querySelector("#departamento").value = cargos[i].DEPARTAMENTO;
+        setC({ ...c, departamento: cargos[i].DEPARTAMENTO });
       }
     }
   }
@@ -110,7 +112,7 @@ function CriarCard({ fecharPainel, BD, Ids }) {
     NewCard.fase = 1;
     NewCard.id = Ids;
 
-    let p = "http://localhost:4500" + BD
+    let p = "http://localhost:4500" + BD;
 
     fetch(p, {
       method: "POST",
@@ -144,107 +146,105 @@ function CriarCard({ fecharPainel, BD, Ids }) {
       </button>
 
       <form onSubmit={submit}>
-        <div>
-          <p>Nome: </p>
-          <input
-            id="INP"
-            required
-            autoComplete="off"
-            name="nome"
-            onKeyUp={ToUpperCase}
-            type="text"
-            placeholder="Digite o nome do candidato" /*onChange={HandleChange}*/
-          />
-        </div>
-
-        <div>
-          <p>Telefone: </p>
-          <input
-            type="text"
-            required
-            autoComplete="off"
-            maxLength="15"
-            name="telefone"
-            onChange={HandleChange}
-            placeholder="Digite o numero de telefone do candidato"
-          />
-        </div>
-
-        <div>
-          <p>Cargo: </p>
-          <select
-            name="funcao"
-            required
-            onClick={preencherDepartamentos}
-            onKeyUp={preencherDepartamentos}
-            onChange={preencherFuncao}
-            id="funcao"
-          >
-            {cargos.map((op) => (
-              <option id={op.nome} key={op.id}>
-                {op.nome}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <p>Departamento: </p>
-          <input
-            type="text"
-            required
-            id="departamento"
-            name="departamento"
-            onKeyUp={HandleChange}
-            className={s.departamento}
-            placeholder="Campo preenchido automaticamente"
-            readOnly
-          />
-        </div>
-
-        <div>
-          <p>Salário: </p>
-          <input
-            type="number"
-            required
-            autoComplete="off"
-            name="salario"
-            onChange={HandleChange}
-            placeholder="Digite o salário do candidato"
-          />
-        </div>
-
-        <div className={s.divEscala}>
-          <p>Escala: </p> <br></br>
-          <select
-            name="diaInicio"
-            id="diaInicio"
-            onClick={HandleSelectChange}
-            onChange={HandleSelectChange}
-            className={s.escalaDia}
-            required
-          >
-            {dias.map((e) => (
-              <option id={e.dia} key={e.id}>
-                {e.dia}
-              </option>
-            ))}
-          </select>
-          a
-          <select
-            name="diaFim"
-            id="diaFim"
-            onClick={HandleSelectChange}
-            onChange={HandleSelectChange}
-            className={s.escalaDia}
-            required
-          >
-            {dias.map((e) => (
-              <option id={e.dia} key={e.id}>
-                {e.dia}
-              </option>
-            ))}
-          </select>
+        <p>Nome: </p>
+        <input
+          id="INP"
+          required
+          autoComplete="off"
+          name="nome"
+          onKeyUp={ToUpperCase}
+          type="text"
+          placeholder="Digite o nome do candidato" /*onChange={HandleChange}*/
+        />{" "}
+        <br></br>
+        <br></br>
+        <p>Telefone: </p>
+        <input
+          type="text"
+          required
+          autoComplete="off"
+          maxLength="15"
+          name="telefone"
+          onChange={HandleChange}
+          placeholder="Digite o numero de telefone do candidato"
+        />{" "}
+        <br></br>
+        <br></br>
+        <p>Cargo: </p>
+        <select
+          name="funcao"
+          required
+          onClick={preencherDepartamentos}
+          onKeyUp={preencherDepartamentos}
+          onChange={preencherFuncao}
+          id="funcao"
+        >
+          <option></option>
+          {cargos.map((op) => (
+            <option id={op.NOME_CARGO} key={op.COD_CARGO}>
+              {op.NOME_CARGO}
+            </option>
+          ))}
+        </select>{" "}
+        <br></br>
+        <br></br>
+        <p>Departamento: </p>
+        <input
+          type="text"
+          required
+          id="departamento"
+          name="departamento"
+          onKeyUp={HandleChange}
+          className={s.departamento}
+          placeholder="Campo preenchido automaticamente"
+          readOnly
+        />{" "}
+        <br></br>
+        <br></br>
+        <p>Salário: </p>
+        <input
+          type="number"
+          required
+          autoComplete="off"
+          name="salario"
+          onChange={HandleChange}
+          placeholder="Digite o salário do candidato"
+        />{" "}
+        <br></br>
+        <br></br>
+          <p>Escala: </p>
+          <div>
+            <select
+              name="diaInicio"
+              id="diaInicio"
+              onClick={HandleSelectChange}
+              onChange={HandleSelectChange}
+              className={s.escalaDia}
+              required
+              >
+              {dias.map((e) => (
+                <option id={e.dia} key={e.id}>
+                  {e.dia}
+                </option>
+              ))}
+            </select>
+            -
+            <select
+              name="diaFim"
+              id="diaFim"
+              onClick={HandleSelectChange}
+              onChange={HandleSelectChange}
+              className={s.escalaDia}
+              required
+              >
+              {dias.map((e) => (
+                <option id={e.dia} key={e.id}>
+                  {e.dia}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
           <input
             type="time"
             required
@@ -253,7 +253,7 @@ function CriarCard({ fecharPainel, BD, Ids }) {
             name="escalaInicio"
             onChange={HandleChange}
           />
-          às
+          -
           <input
             type="time"
             required
@@ -263,26 +263,25 @@ function CriarCard({ fecharPainel, BD, Ids }) {
             onChange={HandleChange}
           />
         </div>
-
-        <div>
-          <p>Filial: </p>
-          <select
-            name="filial"
-            required
-            id="filial"
-            onChange={HandleSelectChange}
-          >
-            {filiais.map((op) => (
-              <option id={op} key={op.ID}>
-                {op.nome}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className={s.criarCardButtonSub}>
-          <button>Criar Card</button>
-        </div>
+        <br></br>
+        <p>Filial: </p>
+        <select
+          name="filial"
+          required
+          id="filial"
+          onChange={HandleSelectChange}
+        >
+          <option></option>
+          {filiais.map((op) => (
+            <option id={op.COD_FILIAIS} key={op.COD_FILIAIS}>
+              {op.NOME_FILIAL}
+            </option>
+          ))}
+        </select>
+        <br></br>
+        <br></br>
+        <br></br>
+        <button>Criar Card</button>
       </form>
     </section>
   );
