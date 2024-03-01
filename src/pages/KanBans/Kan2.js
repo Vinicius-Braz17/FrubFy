@@ -8,13 +8,13 @@ import AbrirCardSaude from "../ElementosKanBans/AbrirCardSaude"
 import e from  "../ElementosKanBans/ColunaKanBan.module.css"
 
 
-function Kan2({tipoKanBan, DataKanBan, BD, BDAdmissao}) {
+function Kan2({tipoKanBan, BD}) {
 
     const [KanB, setKanB] = useState([])
 
     useEffect(  
         () => {
-            fetch(`http://localhost:4500${BD}`, {
+            fetch(`http://localhost:4500${BD.DIRETORIO_SAUDE}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ function Kan2({tipoKanBan, DataKanBan, BD, BDAdmissao}) {
     const [visualizacao, setVisualizacao] = useState()
 
     function abrirVisualizacao(e, i) {
-        setVisualizacao(<AbrirCardSaude fecharPainel={fecharVisualizacao} nome={e} Id={i} BD={KanB} paht={BDAdmissao} pahtSaude={BD}/>)
+        setVisualizacao(<AbrirCardSaude fecharPainel={fecharVisualizacao} nome={e} Id={i} BD={KanB} paht={BD.DIRETORIO_ADM} pahtSaude={BD}/>)
     }
 
     function fecharVisualizacao() {
@@ -39,7 +39,7 @@ function Kan2({tipoKanBan, DataKanBan, BD, BDAdmissao}) {
     }
 
 
-    var coluna1 = <ColunaKanBan color={e.colK2} nome={"Cadastro e agendamento SOC"}/>;
+    var coluna1 = <ColunaKanBan color={e.colK2} nome={"Cadastro e agendamento"}/>;
     var coluna2 = <ColunaKanBan color={e.colK2} nome={"Envio Guia de exame médico"}/>;
     var coluna3 = <ColunaKanBan color={e.colK2} nome={"Realização do exame"}/>;
     var coluna4 = <ColunaKanBan color={e.colK2} nome={"Aprovados (Aptos)"}/>;
@@ -88,7 +88,7 @@ showKB()
     return (
         <>
             {visualizacao}
-            <Navegacao tipoKanBan={tipoKanBan} DataKanBan={DataKanBan} admissao={BDAdmissao}/>
+            <Navegacao tipoKanBan={tipoKanBan} DataKanBan={BD.DATA_ADMISSAO} admissao={BD.DIRETORIO_ADM}/>
             <section className={s.KanBan}>
                 {coluna1}
                 {coluna2}

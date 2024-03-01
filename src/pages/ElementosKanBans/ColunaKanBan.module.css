@@ -37,13 +37,11 @@
 }
 
 .colKB div {
-    box-sizing: border-box;
     margin-top: 3px;
+    max-height: 93%;
     padding: 10px;
-    z-index: 0;
     display: flex;
     flex-direction: column-reverse;
-    overflow-x: hidden;
     overflow-y: scroll;
 }
 

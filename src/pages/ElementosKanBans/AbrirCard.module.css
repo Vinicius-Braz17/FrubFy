@@ -1,201 +1,235 @@
 .criarCard {
-    z-index: 1;
-    position: absolute;
-    top: 0%;
-    left: 30%;
-    margin: 0 auto;
-    margin-top: 2%;
-    width: 40%;
-    height: 550px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0px 0px 30px 9999px rgb(0,0,0,0.7);
-    border: 1px solid rgb(180, 180, 180);
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 550px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 0px 30px 9999px rgb(0, 0, 0, 0.7);
+  border: 1px solid rgb(180, 180, 180);
 }
 
 .criarCard h1 {
-    background-color: rgb(220, 177, 255);
-    border-bottom: solid 2px ;
-    font-family:Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    margin: 0px;
-    padding: 10px 0;
-    font-size: 25px;
-    border-radius: 20px 20px 0 0;
-    text-align: center
+  background-color: rgb(220, 177, 255);
+  border-bottom: solid 2px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  margin: 0px;
+  padding: 10px 0;
+  font-size: 25px;
+  border-radius: 20px 20px 0 0;
+  text-align: center;
 }
 
 #botaoX {
-    text-align: center;
-    position: absolute;
-    top: 5px;
-    right: 12px;
-    border-radius: 100%;
-    padding: 3px;
-    width: 35px;
-    height: 35px;
-    font-size: 25px;
-    background-color: rgb(220, 177, 255);
-    transition: all 0.3s;
-    border: none
+  text-align: center;
+  position: absolute;
+  top: 5px;
+  right: 12px;
+  border-radius: 100%;
+  padding: 3px;
+  width: 35px;
+  height: 35px;
+  font-size: 25px;
+  background-color: rgb(220, 177, 255);
+  transition: all 0.3s;
+  border: none;
 }
 
 #botaoX:hover {
-    background-color: rgb(255, 52, 52);
+  background-color: rgb(255, 52, 52);
 }
 
 .criarCard form {
-    text-align: center;
-    box-sizing: border-box;
-    padding: 5px 10%;
-    width: 100%;
-    height: 88.5%;
-    overflow-y: scroll;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 5px 10%;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .criarCard form div {
-    margin: 25px 0px;
+  margin: 25px 0px;
 }
 
 .criarCard form div p {
-    margin: 5px auto;
-    width: 357px;
-    text-align: left;
-    font-size: 17px;
-
-}
-
-.criarCard form div input{
-    border: 1px solid rgb(71, 25, 109);
-    margin: 0;
-    width: 350px;
-    height: 30px;
-    font-size: 17px;
-    border-radius: 5px; 
-}
-
-.criarCard form div select{
-    border: 1px solid rgb(71, 25, 109);
-    margin: 0;
-    width: 355px;
-    height: 30px;
-    font-size: 17px;
-    border-radius: 5px; 
+  margin: 5px auto;
+  width: 357px;
+  text-align: left;
+  font-size: 17px;
 }
 
 .departamento {
-    background-color: rgb(226, 226, 226);
+  background-color: rgb(226, 226, 226);
 }
 
 .criarCard form .buttonSubmit button {
-    height: 30px;
-    width: 100px;
-    margin: 10px 15px;
-    background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(163, 51, 255);
-    position: relative;
-    z-index: 1;
-    transition: all 0.2s;
-    cursor: pointer;
+  height: 30px;
+  width: 100px;
+  margin: 28px 15px;
+  font-size: 11px;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(163, 51, 255);
+  position: relative;
+  z-index: 1;
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
 .criarCard form .buttonSubmit button:hover {
-    background-color: rgb(184, 97, 255);
+  background-color: rgb(184, 97, 255);
 }
 
 .criarCard form .buttonSubmit .faseAnterior {
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    border: 2px solid rgb(255, 80, 80)
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: 2px solid rgb(255, 80, 80);
 }
 
 .criarCard form .buttonSubmit .faseAnterior::after {
-    content: '<';
-    position: absolute;
-    top: 0;
-    right: -100%;
-    z-index: -1;
-    display: block;
-    background-color: rgb(255, 80, 80);
-    width: 100%;
-    height: 100%;
-    font-size: 25px;
-    transition: all 0.2s;
+  content: "<";
+  position: absolute;
+  top: 0;
+  right: -100%;
+  z-index: -1;
+  display: block;
+  background-color: rgb(255, 80, 80);
+  width: 100%;
+  height: 100%;
+  font-size: 25px;
+  transition: all 0.2s;
 }
 
 .criarCard form .buttonSubmit .faseAnterior:hover {
-    background-color: white;
+  background-color: white;
 }
 
 .criarCard form .buttonSubmit .faseAnterior:hover::after {
-    right: 0;
-    color: black;
-    z-index: 1;
+  right: 0;
+  color: black;
+  z-index: 1;
 }
 
-
 .criarCard form .buttonSubmit .fasePosterior {
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    border: 2px solid rgb(33, 255, 44)
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: 2px solid rgb(33, 255, 44);
 }
 
 .criarCard form .buttonSubmit .fasePosterior::after {
-    content: '>';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    z-index: -1;
-    display: block;
-    background-color: rgb(33, 255, 44);
-    width: 100%;
-    height: 100%;
-    font-size: 25px;
-    transition: all 0.2s;
+  content: ">";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  z-index: -1;
+  display: block;
+  background-color: rgb(33, 255, 44);
+  width: 100%;
+  height: 100%;
+  font-size: 25px;
+  transition: all 0.2s;
 }
 
 .criarCard form .buttonSubmit .fasePosterior:hover {
-    background-color: white;
+  background-color: white;
 }
 
 .criarCard form .buttonSubmit .fasePosterior:hover::after {
-    left: 0;
-    color: black;
-    z-index: 1;
+  left: 0;
+  color: black;
+  z-index: 1;
 }
 
-
-.criarCard form div .escala {
+/* .criarCard form div .escala {
     width: 37.5%;
     margin: 0px 10px;
-}
+} */
 
 .criarCard form div .escalaDia {
-    width: 38.6%;
-    margin: 0px 12px;
+  width: 38.6%;
+  margin: 0px 12px;
 }
 
 .criarCard form .divEscala {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.criarCard form .declinio {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
 }
 
 .criarCard form .declinio input {
-    width: 20px;
-    margin: 0 5px;
-    height: 20px;
-    vertical-align: middle;
+  width: 20px;
+  margin: 0 5px;
+  height: 20px;
+}
+
+.criarCard form .declinio label {
+  height: 25px;
+  margin: 0 5px;
+  padding: 7px 0;
+  width: fit-content;
+  text-align: left;
 }
 
 .criarCard form .excluirCard button {
-    border: none;
-    width: 120px;
-    height: 25px;
-    border-radius: 10px;
-    background-color: rgb(255, 49, 49);
-    color: white;
-    cursor: pointer;
+  border: none;
+  width: 120px;
+  height: 25px;
+  border-radius: 10px;
+  background-color: rgb(255, 49, 49);
+  color: white;
+  cursor: pointer;
+}
+
+.criarCard form {
+  text-align: center;
+  padding: 35px 0;
+  overflow: hidden;
+  height: 89%;
+  overflow-y: scroll;
+}
+
+.criarCard form input,
+select {
+  border-radius: 15px;
+  padding: 0 5px;
+  margin: 0;
+  width: 65%;
+  font-size: 17px;
+  height: 40px;
+  border: 1px solid black;
+}
+.criarCard form select {
+  width: 66%;
+}
+
+.criarCard form p {
+  font-size: 17px;
+  text-align: left;
+  margin: 5px auto;
+  width: 65%;
+}
+
+.criarCard form div {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 68%;
+  margin: 10px auto;
+}
+
+.criarCard form div * {
+  width: 65%;
+  margin: 0 20px;
+  height: 35px;
 }

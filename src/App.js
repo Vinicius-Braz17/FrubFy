@@ -4,24 +4,37 @@ import Kan1 from "./pages/KanBans/Kan1";
 import Kan2 from "./pages/KanBans/Kan2";
 import { useState } from "react";
 import { useEffect } from "react";
+import { createClient } from "@supabase/supabase-js";
 
 function App() {
   const [BancoDados, setBancoDados] = useState([]);
   
+  const sp = createClient("https://vlyrqlntoaqrrafufybv.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZseXJxbG50b2FxcnJhZnVmeWJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkzMzE0NDYsImV4cCI6MjAyNDkwNzQ0Nn0.CS21CLVfZKFD66Elev9DfcsXQD36IO9R6us7ieXbOVA");
+  
+  /* nova API para banco de dados */
+  async function getBancoDados() {
+    const { data } = await sp.from("admissoes").select();
+    setBancoDados(data);
+  }
   useEffect(() => {
-    fetch("http://localhost:4500/KanBans", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setBancoDados(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    getBancoDados();
+  });
 
+  
+  // useEffect(() => {
+  //   fetch("http://localhost:8800/ADMISSOES", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       setBancoDados(data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
+  
   var PrintKanBans = [];
   const [rotas, setRotas] = useState([]);
 
@@ -54,13 +67,11 @@ function App() {
     for (let i = 0; i < BancoDados.length; i++) {
       RotasTemp.push(
         <Route
-          path={BancoDados[i].rota}
+          path={BancoDados[i].diretorio_adm}
           element={
             <Kan1
               tipoKanBan="Admissão"
-              DataKanBan={BancoDados[i].data}
-              BD={BancoDados[i].rota}
-              BDsaude={BancoDados[i].rotaSaude}
+              BD={BancoDados[i]}
             />
           }
         />
@@ -68,13 +79,11 @@ function App() {
 
       RotasTemp.push(
         <Route
-          path={BancoDados[i].rotaSaude}
+          path={BancoDados[i].diretorio_saude}
           element={
             <Kan2
               tipoKanBan="Saúde"
-              DataKanBan={BancoDados[i].data}
-              BD={BancoDados[i].rotaSaude}
-              BDAdmissao={BancoDados[i].rota}
+              BD={BancoDados[i]}
             />
           }
         />

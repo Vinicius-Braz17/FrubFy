@@ -7,13 +7,14 @@ import Card from '../ElementosKanBans/Card'
 import CriarCard from '../ElementosKanBans/CriarCard'
 import AbrirCard from '../ElementosKanBans/AbrirCard'
 
-function Kan1({tipoKanBan, DataKanBan, BD, BDsaude}) {
+function Kan1({tipoKanBan, BD}) {
     
     const [KanB, setKanB] = useState([])
+    const [colaboradores, setColaboradores] = useState()
 
     useEffect(
         () => {
-        fetch(`http://localhost:4500${BD}`, {
+        fetch(`http://localhost:8800/ADMISSOES`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -27,11 +28,33 @@ function Kan1({tipoKanBan, DataKanBan, BD, BDsaude}) {
         },[BD]
     )
 
+    useEffect(
+        () => {
+        fetch(`http://localhost:8800/CANDIDATOS`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+         .then((resp) => resp.json())
+        .then((data) => {
+        setColaboradores(data)
+    })
+    .catch((err) => console.log(err))
+        },[BD]
+    )
+    
+    // for (let i = 0; i < colaboradores.length; i++) {
+    //     var newCol = []
+    //     if (colaboradores[i].COD_ADMISSAO === KanB.COD_ADMISSAO) {
+    //         newCol.push(colaboradores[i])
+    //     }  
+    // }
 
     const [visualizacao, setVisualizacao] = useState()
 
     function abrirVisualizacao(e, i) {
-        setVisualizacao(<AbrirCard fecharPainel={fecharVisualizacao} nome={e} Id={i} BD={KanB} paht={BD} pahtSaude={BDsaude}/>)
+        setVisualizacao(<AbrirCard fecharPainel={fecharVisualizacao} nome={e} Id={i} BD={KanB} paht={BD} pahtSaude={BD.DIRETORIO_SAUDE}/>)
     }
 
     function fecharVisualizacao() {
@@ -53,15 +76,13 @@ function Kan1({tipoKanBan, DataKanBan, BD, BDsaude}) {
 
     function closeCardCreation() {
         setCC([])
-    }
-
-    
+    }  
 
     var coluna1 = <ColunaKanBan nome={"Triagem"} color={e.colK1} botao={(<button title='Crie um novo card' onClick={createProject}>+</button>)}/>;
     var coluna2 = <ColunaKanBan nome={"Primeira Etapa"} color={e.colK1}/>;
-    var coluna3 = <ColunaKanBan nome={"Saúde e conta bancária"} color={e.colK1}/>;
-    var coluna4 = <ColunaKanBan nome={"Segunda Etapa"} color={e.colK1}/>;
-    var coluna5 = <ColunaKanBan nome={"Conferência 2ª etapa"} color={e.colK1}/>;
+    var coluna3 = <ColunaKanBan nome={"Exame médico admissional"} color={e.colK1}/>;
+    var coluna4 = <ColunaKanBan nome={"Etapa de documentações"} color={e.colK1}/>;
+    var coluna5 = <ColunaKanBan nome={"Verificações"} color={e.colK1}/>;
     var coluna6 = <ColunaKanBan nome={"Emissão e envio contratos"} color={e.colK1}/>;
     var coluna7 = <ColunaKanBan nome={"Onboarding"} color={e.colK1}/>;
     var coluna8 = <ColunaKanBan nome={"Declínio"} color={e.colK1}/>;
@@ -117,7 +138,7 @@ showKB()
     return (
         <>
         {visualizacao}
-            <Navegacao tipoKanBan={tipoKanBan} DataKanBan={DataKanBan} saude={BDsaude}/>    
+            <Navegacao tipoKanBan={tipoKanBan} DataKanBan={BD.DATA_ADMISSAO} saude={BD.DIRETORIO_SAUDE}/>    
             <section className={s.KanBan}>
                 {coluna1}
                 {coluna2}

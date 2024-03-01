@@ -1,9 +1,8 @@
 .painelKanBans .PainelInterno {
     text-align:center;
     display: flex;
-    flex-wrap: wrap-reverse;
-    flex-direction: row-reverse;
-    max-height: 510px;
+    flex-wrap: wrap;
+    max-height: 680px;
     width: 100%;
     margin-top: 15px;
     overflow-x: hidden;

@@ -1,4 +1,4 @@
-{
+{ 
   "KanBans": [
     {
       "data": "2023-02-03",
@@ -7,10 +7,52 @@
       "id": 1
     },
     {
-      "data": "2004-02-03",
+      "data": "2024-03-02",
       "rota": "/AD2",
       "rotaSaude": "/S2",
       "id": 2
+    },
+    {
+      "data": "2024-05-01",
+      "rota": "/AD3",
+      "rotaSaude": "/S3",
+      "id": 3
+    },
+    {
+      "data": "2024-03-06",
+      "rota": "/AD4",
+      "rotaSaude": "/S4",
+      "id": 4
+    },
+    {
+      "data": "2023-06-28",
+      "rota": "/AD5",
+      "rotaSaude": "/S5",
+      "id": 5
+    },
+    {
+      "data": "2011-11-11",
+      "rota": "/AD6",
+      "rotaSaude": "/S6",
+      "id": 6
+    },
+    {
+      "data": "2024-09-29",
+      "rota": "/AD7",
+      "rotaSaude": "/S7",
+      "id": 7
+    },
+    {
+      "data": "2024-03-15",
+      "rota": "/AD8",
+      "rotaSaude": "/S8",
+      "id": 8
+    },
+    {
+      "data": "2024-12-12",
+      "rota": "/AD9",
+      "rotaSaude": "/S9",
+      "id": 9
     }
   ],
   "cargos": [
@@ -153,35 +195,123 @@
   ],
   "AD1": [
     {
-      "nome": "DS",
-      "telefone": "dsad",
-      "funcao": "Jovem aprendiz administrativo",
+      "nome": "COLABORADOR 1",
+      "telefone": "11912345678",
+      "funcao": "Analista de RH",
       "departamento": "RH",
-      "salario": "913",
-      "diaInicio": "Terça-feira",
+      "salario": "2200",
+      "diaInicio": "Segunda-feira",
       "diaFim": "Sexta-feira",
       "escalaInicio": "09:00",
-      "escalaFim": "15:00",
-      "filial": "SANTO ANDRE",
+      "escalaFim": "18:00",
+      "filial": "BELO HORIZONTE",
       "fase": 1,
       "id": 1
     },
     {
-      "nome": "KATIA SILVA ZANINNI",
-      "telefone": "48484488",
-      "funcao": "Técnico de segurança do trabalho Sr.",
-      "departamento": "Segurança do trabalho",
-      "salario": "5000",
+      "nome": "COLABORADOR 2",
+      "telefone": "119987654321",
+      "funcao": "WAREHOUSE ASSOCIATE III 1PL",
+      "departamento": "WAREHOUSE",
+      "salario": "5120",
       "diaInicio": "Segunda-feira",
-      "diaFim": "Quinta-feira",
+      "diaFim": "Sexta-feira",
+      "escalaInicio": "09:00",
+      "escalaFim": "18:00",
+      "filial": "MATRIZ",
+      "fase": 4,
+      "id": 2
+    },
+    {
+      "nome": "COLABORADOR 3",
+      "telefone": "11995485562",
+      "funcao": "PAYROOL & HIRING ANALYST I",
+      "departamento": "PAYROOL & HIRING",
+      "salario": "1800",
+      "diaInicio": "Terça-feira",
+      "diaFim": "Sábado",
+      "escalaInicio": "12:00",
+      "escalaFim": "20:00",
+      "filial": "CAMPINAS",
+      "fase": 2,
+      "id": 3
+    },
+    {
+      "nome": "COLABORADOR 4",
+      "telefone": "115452825841",
+      "funcao": "PAYROOL & HIRING ANALYST II",
+      "departamento": "PAYROOL & HIRING",
+      "salario": "3200",
+      "diaInicio": "Segunda-feira",
+      "diaFim": "Sexta-feira",
+      "escalaInicio": "09:00",
+      "escalaFim": "18:00",
+      "filial": "SANTO ANDRE",
+      "fase": 2,
+      "id": 4
+    },
+    {
+      "nome": "COLABORADOR 5",
+      "telefone": "11998451120",
+      "funcao": "PAYROOL & HIRING APPRENDICE",
+      "departamento": "PAYROOL & HIRING",
+      "salario": "1200",
+      "diaInicio": "Terça-feira",
+      "diaFim": "Sábado",
+      "escalaInicio": "05:00",
+      "escalaFim": "15:00",
+      "filial": "SANTO ANDRE",
+      "fase": 3,
+      "id": 5
+    }
+  ],
+  "S1": [
+    {
+      "nome": "COLABORADOR 2",
+      "telefone": "119987654321",
+      "funcao": "WAREHOUSE ASSOCIATE III 1PL",
+      "departamento": "WAREHOUSE",
+      "salario": "5120",
+      "diaInicio": "Segunda-feira",
+      "diaFim": "Sexta-feira",
       "escalaInicio": "09:00",
       "escalaFim": "18:00",
       "filial": "MATRIZ",
       "fase": 1,
-      "id": 2
+      "id": 2,
+      "dataExame": ""
+    },
+    {
+      "nome": "COLABORADOR 4",
+      "telefone": "115452825841",
+      "funcao": "PAYROOL & HIRING ANALYST II",
+      "departamento": "PAYROOL & HIRING",
+      "salario": "3200",
+      "diaInicio": "Segunda-feira",
+      "diaFim": "Sexta-feira",
+      "escalaInicio": "09:00",
+      "escalaFim": "18:00",
+      "filial": "SANTO ANDRE",
+      "fase": 2,
+      "id": 4,
+      "dataExame": ""
+    },
+    {
+      "nome": "COLABORADOR 5",
+      "telefone": "11998451120",
+      "funcao": "PAYROOL & HIRING APPRENDICE",
+      "departamento": "PAYROOL & HIRING",
+      "salario": "1200",
+      "diaInicio": "Terça-feira",
+      "diaFim": "Sábado",
+      "escalaInicio": "05:00",
+      "escalaFim": "15:00",
+      "filial": "SANTO ANDRE",
+      "fase": 1,
+      "id": 5,
+      "dataExame": ""
     }
   ],
-  "S1": [],
   "AD2": [],
   "S2": [],
   "AD3": [],
