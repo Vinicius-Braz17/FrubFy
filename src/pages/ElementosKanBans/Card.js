@@ -1,16 +1,16 @@
 import s from './Card.module.css'
 
-function Card({nomeC, funcao, telefone, filial, abrir}) {
+function Card({col, abrir}) {
     
     return (
         <article className={s.card}>
-            <h1><b>{nomeC}</b></h1>
+            <h1><b>{col.nome}</b></h1>
             <hr></hr>
-            <p><b>Cargo:</b> {funcao}</p>
-            <p><b>Filial:</b> {filial}</p>
-            <p><b>Telefone: </b><a title={`Chame ${nomeC} para conversar`} href={`https://api.whatsapp.com/send/?phone=${telefone}&text&type=phone_number&app_absent=0`} $telefone target="_blank" rel='noreferrer'>{telefone}</a></p>
+            <p><b>Cargo:</b> {col.cargo}</p>
+            <p><b>Filial:</b> {col.filial}</p>
+            <p><b>Telefone: </b><a title={`Chame ${col.nome} para conversar`} href={`https://api.whatsapp.com/send/?phone=${col.telefone}&text&type=phone_number&app_absent=0`} $telefone target="_blank" rel='noreferrer'>{col.telefone}</a></p>
             <hr></hr>
-            <button className={s.vizualizar}  onClick={abrir}>Vizualizar Card</button>
+            <button className={s.vizualizar} onClick={abrir}>Vizualizar Card</button>
         </article>
     )
 }

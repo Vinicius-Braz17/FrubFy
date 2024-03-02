@@ -1,88 +1,55 @@
 import s from "./AbrirCard.module.css";
 import { useEffect, useState } from "react";
+import sp from "../../Supabase";
 
-function AbrirCard({ fecharPainel, BD, nome, Id, paht, pahtSaude }) {
-  let loaded;
+function AbrirCard({ fecharPainel, col }) {
   const dias = [
     {
       dia: "",
-      id: 0,
     },
     {
       dia: "Segunda-feira",
-      id: 1,
     },
     {
       dia: "Terça-feira",
-      id: 2,
     },
     {
       dia: "Quarta-feira",
-      id: 3,
     },
     {
       dia: "Quinta-feira",
-      id: 4,
     },
     {
       dia: "Sexta-feira",
-      id: 5,
     },
     {
       dia: "Sábado",
-      id: 6,
     },
     {
       dia: "Domingo",
-      id: 7,
     },
   ];
 
-  const [KanB] = useState(BD || {});
-
-  let colaborador = {};
-
-  function renderizar() {
-    let index = findIndex(KanB, Id);
-
-    colaborador = KanB[index];
-    loaded = 1;
-  }
-
-  renderizar();
-
+  const colaborador = col
   const [c, setC] = useState(colaborador);
   const [cargos, setCargos] = useState([]);
   const [filiais, setFiliais] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:4500/cargos", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setCargos(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+ 
+  async function getCargos() {
+    const { data } = await sp.from("cargos").select();
+    setCargos(data);
+  }
+  async function getFiliais() {
+    const { data } = await sp.from("filiais").select();
+    setFiliais(data);
+  }
 
   useEffect(() => {
-    fetch("http://localhost:4500/filiais", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setFiliais(data);
-      })
-      .catch((err) => console.log(err));
+    getCargos();
+    getFiliais();
   }, []);
-
+  
   function preencherDepartamentos() {
     var opcaoSelecionada = document.querySelector("#funcao").value;
 
@@ -122,209 +89,11 @@ function AbrirCard({ fecharPainel, BD, nome, Id, paht, pahtSaude }) {
     console.log(c);
   }
 
-  function findIndex(e, n) {
-    for (let i = 0; i < e.length; i++) {
-      if (e[i].id === n) {
-        return i;
-      }
-    }
-  }
-
-  function atualizarCard(cardAtualizado) {
-    let dec = document.querySelector("#declinio");
-
-    if (dec.checked) {
-      cardAtualizado.fase = 8;
-
-      fetch(`http://localhost:4500${paht}/${Id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(cardAtualizado),
-      })
-        .then((resp) => resp.json())
-        .catch((err) => console.log(err));
-
-      var CardDeclinioS = cardAtualizado;
-      CardDeclinioS.fase = 6;
-
-      fetch(`http://localhost:4500${pahtSaude}/${Id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(CardDeclinioS),
-      })
-        .then((resp) => resp.json())
-        .catch((err) => console.log(err));
-    } else {
-      fetch(`http://localhost:4500${paht}/${Id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(cardAtualizado),
-      })
-        .then((resp) => resp.json())
-        .catch((err) => console.log(err));
-
-      if (cardAtualizado.fase >= 3) {
-        var CS = {
-          nome: cardAtualizado.nome,
-          telefone: cardAtualizado.telefone,
-          departamento: cardAtualizado.departamento,
-          funcao: cardAtualizado.funcao,
-          diaInicio: cardAtualizado.diaInicio,
-          diaFim: cardAtualizado.diaFim,
-          escalaInicio: cardAtualizado.escalaInicio,
-          escalaFim: cardAtualizado.escalaFim,
-          filial: cardAtualizado.filial,
-          id: cardAtualizado.id,
-        };
-
-        fetch(`http://localhost:4500${pahtSaude}/${Id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(CS),
-        })
-          .then((resp) => resp.json())
-          .catch((err) => console.log(err));
-      }
-    }
-  }
-
-  function removerCard() {
-    fetch(`http://localhost:4500${paht}/${Id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .catch((err) => console.log(err));
-
-    fetch(`http://localhost:4500${pahtSaude}/${Id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .catch((err) => console.log(err));
-  }
-
-  function cardParaSaude(card) {
-    var cardS = card;
-    cardS.fase = 1;
-    cardS.dataExame = "";
-
-    fetch(`http://localhost:4500${pahtSaude}`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(cardS),
-    })
-      .then((resp) => {
-        resp.json();
-      })
-      .catch((err) => console.log(err));
-  }
-
-  function moverFase(direcao, cardAtualizado) {
-    if (cardAtualizado.fase === 8) {
-      alert("Você não pode mover cards declinados");
-    } else if (cardAtualizado.fase === 7) {
-      alert("Você não pode mover cards concluídos, apenas atualizá-los");
-    } else {
-      if (direcao === 1) {
-        cardAtualizado.fase++;
-
-        fetch(`http://localhost:4500${paht}/${Id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(cardAtualizado),
-        })
-          .then((resp) => resp.json())
-          .catch((err) => console.log(err));
-
-        if (cardAtualizado.fase === 3) {
-          cardParaSaude(cardAtualizado);
-        } else if (cardAtualizado.fase > 3) {
-          var CS = {
-            nome: cardAtualizado.nome,
-            telefone: cardAtualizado.telefone,
-            departamento: cardAtualizado.departamento,
-            funcao: cardAtualizado.funcao,
-            diaInicio: cardAtualizado.diaInicio,
-            diaFim: cardAtualizado.diaFim,
-            escalaInicio: cardAtualizado.escalaInicio,
-            escalaFim: cardAtualizado.escalaFim,
-            filial: cardAtualizado.filial,
-            id: cardAtualizado.id,
-          };
-
-          fetch(`http://localhost:4500${pahtSaude}/${Id}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(CS),
-          })
-            .then((resp) => resp.json())
-            .catch((err) => console.log(err));
-        }
-      } else {
-        cardAtualizado.fase--;
-
-        fetch(`http://localhost:4500${paht}/${Id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(cardAtualizado),
-        })
-          .then((resp) => resp.json())
-          .catch((err) => console.log(err));
-
-        if (cardAtualizado.fase > 2) {
-          CS = {
-            nome: cardAtualizado.nome,
-            telefone: cardAtualizado.telefone,
-            departamento: cardAtualizado.departamento,
-            funcao: cardAtualizado.funcao,
-            diaInicio: cardAtualizado.diaInicio,
-            diaFim: cardAtualizado.diaFim,
-            escalaInicio: cardAtualizado.escalaInicio,
-            escalaFim: cardAtualizado.escalaFim,
-            filial: cardAtualizado.filial,
-            id: cardAtualizado.id,
-          };
-
-          fetch(`http://localhost:4500${pahtSaude}/${Id}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(CS),
-          })
-            .then((resp) => resp.json())
-            .catch((err) => console.log(err));
-        }
-      }
-    }
-  }
 
   return (
     <section className={s.criarCard}>
-      {loaded && (
         <>
-          <h1>{nome}</h1>
+          <h1>{colaborador.nome}</h1>
           <button id={s.botaoX} onClick={fecharPainel}>
             X
           </button>
@@ -339,7 +108,8 @@ function AbrirCard({ fecharPainel, BD, nome, Id, paht, pahtSaude }) {
               defaultValue={colaborador.nome}
               onKeyUp={ToUpperCase}
               type="text"
-              placeholder="Digite o nome do candidato" /*onChange={HandleChange}*/
+              placeholder="Digite o nome do candidato"
+              onChange={HandleChange}
             />{" "}
             <br></br>
             <br></br>
@@ -361,26 +131,26 @@ function AbrirCard({ fecharPainel, BD, nome, Id, paht, pahtSaude }) {
               name="funcao"
               required
               onClick={preencherDepartamentos}
-              defaultValue={colaborador.funcao}
               onKeyUp={preencherDepartamentos}
               onChange={preencherFuncao}
               id="funcao"
             >
               <option></option>
               {cargos.map((op) => {
-                if (op.nome === colaborador.funcao) {
+                if (op.nome_cargo === colaborador.cargo) {
                   return (
-                    <option id={op.nome} key={op.id} selected>
-                      {op.nome}
+                    <option id={op.nome_cargo} key={op.cod_cargo} selected>
+                      {op.nome_cargo}
                     </option>
-                  );
+                  )
                 } else {
                   return (
-                    <option id={op.nome} key={op.id}>
-                      {op.nome}
+                    <option id={op.nome_cargo} key={op.cod_cargo}>
+                      {op.nome_cargo}
                     </option>
-                  );
+                  )
                 }
+                  
               })}
             </select>
             <br></br>
@@ -422,7 +192,7 @@ function AbrirCard({ fecharPainel, BD, nome, Id, paht, pahtSaude }) {
                 required
               >
                 {dias.map((e) => {
-                  if (e.dia === colaborador.diaInicio) {
+                  if (e.dia === colaborador.dia_inicio) {
                     return (
                       <option id={e.dia} key={e.id} selected>
                         {e.dia}
@@ -447,7 +217,7 @@ function AbrirCard({ fecharPainel, BD, nome, Id, paht, pahtSaude }) {
                 required
               >
                 {dias.map((e) => {
-                  if (e.dia === colaborador.diaFim) {
+                  if (e.dia === colaborador.dia_fim) {
                     return (
                       <option id={e.dia} key={e.id} selected>
                         {e.dia}
@@ -469,7 +239,7 @@ function AbrirCard({ fecharPainel, BD, nome, Id, paht, pahtSaude }) {
                 required
                 className={s.escala}
                 autoComplete="off"
-                defaultValue={colaborador.escalaInicio}
+                defaultValue={colaborador.horario_inicio}
                 name="escalaInicio"
                 onChange={HandleChange}
               />
@@ -479,7 +249,7 @@ function AbrirCard({ fecharPainel, BD, nome, Id, paht, pahtSaude }) {
                 required
                 className={s.escala}
                 autoComplete="off"
-                defaultValue={colaborador.escalaFim}
+                defaultValue={colaborador.horario_fim}
                 name="escalaFim"
                 onChange={HandleChange}
               />
@@ -494,16 +264,16 @@ function AbrirCard({ fecharPainel, BD, nome, Id, paht, pahtSaude }) {
             >
               <option></option>
               {filiais.map((op) => {
-                if (op.nome === colaborador.filial) {
+                if (op.nome_filial === colaborador.filial) {
                   return (
-                    <option id={op.nome} key={op.id} selected>
-                      {op.nome}
+                    <option id={op.nome_filial} key={op.cod_filial} selected>
+                      {op.nome_filial}
                     </option>
                   );
                 } else {
                   return (
-                    <option id={op.nome} key={op.id}>
-                      {op.nome}
+                    <option id={op.nome_filial} key={op.cod_filial}>
+                      {op.nome_filial}
                     </option>
                   );
                 }
@@ -516,16 +286,16 @@ function AbrirCard({ fecharPainel, BD, nome, Id, paht, pahtSaude }) {
               ) : (
                 <button
                   className={s.faseAnterior}
-                  onClick={() => moverFase(0, c)}
+                  /*onClick={() => moverFase(0, c)}*/
                 >
                   Fase anterior
                 </button>
               )}
 
-              <button onClick={() => atualizarCard(c)}>Atualizar card</button>
+              <button /*onClick={() => atualizarCard(c)}*/>Atualizar card</button>
               <button
                 className={s.fasePosterior}
-                onClick={() => moverFase(1, c)}
+                /*onClick={() => moverFase(1, c)}*/
               >
                 Próxima fase
               </button>
@@ -536,13 +306,12 @@ function AbrirCard({ fecharPainel, BD, nome, Id, paht, pahtSaude }) {
               <label>Candidato declinou?</label>
             </div>
             <div className={s.excluirCard}>
-              <button onClick={removerCard}>Excluir card</button>
+              <button /*onClick={removerCard}*/>Excluir card</button>
             </div>
           </form>
         </>
-      )}
     </section>
-  );
+  )  
 }
 
 export default AbrirCard;

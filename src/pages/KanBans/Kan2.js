@@ -88,7 +88,7 @@ showKB()
     return (
         <>
             {visualizacao}
-            <Navegacao tipoKanBan={tipoKanBan} DataKanBan={BD.DATA_ADMISSAO} admissao={BD.DIRETORIO_ADM}/>
+            <Navegacao tipoKanBan={tipoKanBan} DataKanBan={BD.data_admissao} admissao={BD.diretorio_adm}/>
             <section className={s.KanBan}>
                 {coluna1}
                 {coluna2}
