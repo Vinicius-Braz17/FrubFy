@@ -73,6 +73,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## To do
 
 - Escrever documentação
+- Reestilizar o projeto
 - Fazer transição de localhost para supabase
 - Aprender atualização de dados no supabase
 
