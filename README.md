@@ -69,36 +69,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 "# FrubFyEmReact" 
-
-## To do
-
-- Escrever documentação
-- Reestilizar o projeto
-- Fazer transição de localhost para supabase
-- Aprender atualização de dados no supabase
-
-## Scripts para GET, POST E DELETE
-
-### `Imports`
-
-import { createClient } from "@supabase/supabase-js";
-import { useEffect, useState } from "react";
-
-### `Variáveis`
-
-const [tabela, setTabela] = useState([])
-const sp = createClient("https://vlyrqlntoaqrrafufybv.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZseXJxbG50b2FxcnJhZnVmeWJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkzMzE0NDYsImV4cCI6MjAyNDkwNzQ0Nn0.CS21CLVfZKFD66Elev9DfcsXQD36IO9R6us7ieXbOVA");
-
-### `Funções para rodar`
-
-async function nomeFuncao() {
-    GET /// const { data } = await sp.from("nomeTabela").select(); setTabela(data)
-    POST /// const { data } = await sp.from("nometabela").insert({objeto})
-    DELETE /// const { delete } = await sp.from("nomeTabela).delete().eq("nomeAtributo", valoratributo)
-}
-
-useEffect(() => {
-    nomeFuncao()
-})
-
-
