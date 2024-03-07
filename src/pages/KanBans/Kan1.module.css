@@ -1,11 +1,11 @@
 .KanBan {
-    position: relative;
     display: flex;
-    height: 632px;
-    max-height: 750px;
+    position: relative;
     margin: 10px 0px;
     overflow-y: hidden;
     overflow-x: scroll;
+    border: 1px solid rgb(0, 255, 0);
+    height: fit-content;
 }
 
 .KanBan p {
