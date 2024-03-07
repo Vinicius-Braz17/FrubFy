@@ -30,7 +30,13 @@ function Kan1({ tipoKanBan, BD }) {
     <ColunaKanBan
       nome={"Triagem"}
       color={e.colK1}
-      botao={<button title="Crie um novo card">+</button>}
+      botao={<button
+        title="Crie um novo card"
+        id="createCard"
+        onClick={abrirCriarCard}
+      >
+        +
+      </button>}
     />
   );
   var coluna2 = <ColunaKanBan nome={"Primeira Etapa"} color={e.colK1} />;
