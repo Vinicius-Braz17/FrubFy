@@ -110,8 +110,7 @@ function CriarCard({ fecharPainel, BD }) {
     HandleChange(e);
   }
 
-  function submit(e) {
-    e.preventDefault()
+  function submit() {
     inserirCardBD();
   }
 
