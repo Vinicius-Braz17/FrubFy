@@ -1,5 +1,9 @@
 .card {
-    height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 200px;
     width: 100%;
     background-color: white;
     border: 1px solid rgb(156, 156, 156);
@@ -8,7 +12,7 @@
     box-sizing: border-box;
     padding: 5px;
     text-align: center;
-    margin: 8px auto;
+    margin: 10px auto;
     transition: all 0.2s;
 }
 
@@ -19,18 +23,18 @@
 
 .card p {
     border: none;
-    height: 22px;
-    margin: 7px 0;
+    margin: 0px 0;
     padding: 2px 0;
-    border-radius: 0;
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     background-color: rgb(255, 255, 255);
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .card h1 {
     font-size: 17px;
-    margin: 10px 0;
+    margin: 5px 0;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;

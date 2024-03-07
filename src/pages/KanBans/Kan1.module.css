@@ -1,7 +1,8 @@
 .KanBan {
     position: relative;
     display: flex;
-    height: 770px;
+    height: 632px;
+    max-height: 750px;
     margin: 10px 0px;
     overflow-y: hidden;
     overflow-x: scroll;

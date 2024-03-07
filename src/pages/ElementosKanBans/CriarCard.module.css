@@ -11,6 +11,7 @@
     border-radius: 20px;
     box-shadow: 0px 0px 30px 9999px rgb(0,0,0,0.7);
     border: 1px solid rgb(180, 180, 180);
+    z-index: 1;
 }
 
 .criarCard h1 {
@@ -20,7 +21,7 @@
     font-weight: bold;
     margin: 0px;
     padding: 10px 0;
-    font-size: 35px;
+    font-size: 30px;
     border-radius: 20px 20px 0 0;
     text-align: center
 }
@@ -49,7 +50,7 @@
     text-align: center;
     padding: 35px 0;
     overflow: hidden;
-    height: 79%;
+    height: 76%;
     overflow-y: scroll;
 }
 

@@ -7,6 +7,7 @@ import Card from "../ElementosKanBans/Card";
 // import CriarCard from "../ElementosKanBans/CriarCard";
 import AbrirCard from "../ElementosKanBans/AbrirCard";
 import sp from "../../Supabase";
+import CriarCard from "../ElementosKanBans/CriarCard";
 
 function Kan1({ tipoKanBan, BD }) {
   const KanB = BD;
@@ -21,7 +22,7 @@ function Kan1({ tipoKanBan, BD }) {
   }
 
   useEffect(() => {
-    getCandidatos()
+    getCandidatos();
     // eslint-disable-next-line
   }, []);
 
@@ -72,7 +73,15 @@ function Kan1({ tipoKanBan, BD }) {
               nome={"Triagem"}
               color={e.colK1}
               Cards={C}
-              botao={<button title="Crie um novo card">+</button>}
+              botao={
+                <button
+                  title="Crie um novo card"
+                  id="createCard"
+                  onClick={abrirCriarCard}
+                >
+                  +
+                </button>
+              }
             />
           );
         } else if (colaboradores[i].fase === 2) {
@@ -174,7 +183,7 @@ function Kan1({ tipoKanBan, BD }) {
         }
       }
     } catch (error) {
-      /// Dont do nothing, just wait til the app get the informations form the server
+      /// Don't do nothing, just wait untill the app get the informations form the server
     }
   }
 
@@ -200,6 +209,12 @@ function Kan1({ tipoKanBan, BD }) {
 
   function abrirVisualizacao(i) {
     setVisualizacao(<AbrirCard fecharPainel={fecharVisualizacao} col={i} />);
+  }
+
+  function abrirCriarCard() {
+    setVisualizacao(
+      <CriarCard fecharPainel={fecharVisualizacao} BD={BD.cod_admissao} />
+    );
   }
 
   function fecharVisualizacao() {

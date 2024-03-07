@@ -1,8 +1,8 @@
 import s from "./CriarCard.module.css";
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import sp from "../../Supabase";
 
-function CriarCard({ fecharPainel, BD, Ids }) {
+function CriarCard({ fecharPainel, BD }) {
   const dias = [
     {
       dia: "",
@@ -37,26 +37,28 @@ function CriarCard({ fecharPainel, BD, Ids }) {
       id: 7,
     },
   ];
-
+  
+  const [c, setC] = useState({fase: 1, cod_admissao: BD});
+  
   const [cargos, setCargos] = useState([]);
   const [filiais, setFiliais] = useState([]);
   
   /* nova API para banco de dados */
 
-  const sp = createClient("https://vlyrqlntoaqrrafufybv.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZseXJxbG50b2FxcnJhZnVmeWJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkzMzE0NDYsImV4cCI6MjAyNDkwNzQ0Nn0.CS21CLVfZKFD66Elev9DfcsXQD36IO9R6us7ieXbOVA");
-
-  async function insertCol() {
-    const {error} = await sp.from("candidatos").delete().eq('id_candidato', 7);
-  }
   async function getCargos() {
     const { data } = await sp.from("cargos").select();
-    
     setCargos(data);
   }
+
+  async function getFiliais() {
+    const { data } = await sp.from("filiais").select();
+    setFiliais(data)
+  }
+  
   useEffect(() => {
     getCargos();
-    insertCol()
-  });
+    getFiliais()
+  }, []);
 
   // useEffect(() => {
   //   fetch("http://localhost:8800/CARGOS", {
@@ -72,47 +74,33 @@ function CriarCard({ fecharPainel, BD, Ids }) {
   //     .catch((err) => console.log(err));
   // }, []);
 
-  console.log(cargos);
-
-  useEffect(() => {
-    fetch("http://localhost:8800/FILIAIS", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setFiliais(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  function preencherDepartamentos() {
-    var opcaoSelecionada = document.querySelector("#funcao").value;
+  function preencherDepartamentos(e) {
 
     for (let i = 0; i < cargos.length; i++) {
-      if (opcaoSelecionada === cargos[i].NOME_CARGO) {
-        document.querySelector("#departamento").value = cargos[i].DEPARTAMENTO;
-        setC({ ...c, departamento: cargos[i].DEPARTAMENTO });
-      }
+      if (e.target.value === cargos[i].nome_cargo) {
+        document.getElementById('departamento').value = cargos[i].departamento;
+        setC({...c, cargo: e.target.value, departamento: cargos[i].departamento})
+        break;
+      } 
     }
-  }
-
-  function preencherFuncao() {
-    var opcaoSelecionada = document.querySelector("#funcao").value;
-
-    preencherDepartamentos();
-
-    setC({ ...c, funcao: opcaoSelecionada });
-
     console.log(c);
   }
 
-  function HandleSelectChange(e) {
-    var opcaoSelecionada = document.getElementById(e.target.name).value;
+  // function preencherFuncao() {
+  //   var opcaoSelecionada = document.querySelector("#funcao").value;
 
-    setC({ ...c, [e.target.name]: opcaoSelecionada });
+  //   preencherDepartamentos();
+
+  //   setC({ ...c, funcao: opcaoSelecionada });
+
+  //   console.log(c);
+  // }
+
+  function HandleSelectChange(e) {
+    console.log(e.target.value);
+    console.log(e.target.name);
+
+    setC({...c, [e.target.name]: e.target.value });
     console.log(c);
   }
 
@@ -122,34 +110,15 @@ function CriarCard({ fecharPainel, BD, Ids }) {
     HandleChange(e);
   }
 
-  function submit() {
-    inserirCardBD(c);
+  function submit(e) {
+    inserirCardBD();
   }
 
-  function inserirCardBD(NewCard) {
-    NewCard.fase = 1;
-    NewCard.id = Ids;
-
-    let p = "http://localhost:4500" + BD;
-
-    fetch(p, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(NewCard),
-    })
-      .then((resp) => {
-        // return resp.text();
-        resp.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => console.log(err));
+  async function inserirCardBD(newCard) {
+    // Função para inserir cards no banco de dados
+    const { data } = await sp.from('candidatos').insert(c)
+    console.log(data);
   }
-
-  const [c, setC] = useState({});
 
   function HandleChange(e) {
     setC({ ...c, [e.target.name]: e.target.value });
@@ -176,6 +145,18 @@ function CriarCard({ fecharPainel, BD, Ids }) {
         />{" "}
         <br></br>
         <br></br>
+        <p>Email: </p>
+        <input
+          id="INP"
+          required
+          autoComplete="off"
+          name="email"
+          onKeyUp={ToUpperCase}
+          type="email"
+          placeholder="Digite o email do candidato"
+        />{" "}
+        <br></br>
+        <br></br>
         <p>Telefone: </p>
         <input
           type="text"
@@ -192,9 +173,7 @@ function CriarCard({ fecharPainel, BD, Ids }) {
         <select
           name="funcao"
           required
-          onClick={preencherDepartamentos}
-          onKeyUp={preencherDepartamentos}
-          onChange={preencherFuncao}
+          onChange={preencherDepartamentos}
           id="funcao"
         >
           <option></option>
@@ -212,7 +191,6 @@ function CriarCard({ fecharPainel, BD, Ids }) {
           required
           id="departamento"
           name="departamento"
-          onKeyUp={HandleChange}
           className={s.departamento}
           placeholder="Campo preenchido automaticamente"
           readOnly
@@ -233,7 +211,7 @@ function CriarCard({ fecharPainel, BD, Ids }) {
           <p>Escala: </p>
           <div>
             <select
-              name="diaInicio"
+              name="dia_inicio"
               id="diaInicio"
               onClick={HandleSelectChange}
               onChange={HandleSelectChange}
@@ -248,7 +226,7 @@ function CriarCard({ fecharPainel, BD, Ids }) {
             </select>
             -
             <select
-              name="diaFim"
+              name="dia_fim"
               id="diaFim"
               onClick={HandleSelectChange}
               onChange={HandleSelectChange}
@@ -268,7 +246,7 @@ function CriarCard({ fecharPainel, BD, Ids }) {
             required
             className={s.escala}
             autoComplete="off"
-            name="escalaInicio"
+            name="horario_inicio"
             onChange={HandleChange}
           />
           -
@@ -277,7 +255,7 @@ function CriarCard({ fecharPainel, BD, Ids }) {
             required
             className={s.escala}
             autoComplete="off"
-            name="escalaFim"
+            name="horario_fim"
             onChange={HandleChange}
           />
         </div>
@@ -291,15 +269,15 @@ function CriarCard({ fecharPainel, BD, Ids }) {
         >
           <option></option>
           {filiais.map((op) => (
-            <option id={op.COD_FILIAIS} key={op.COD_FILIAIS}>
-              {op.NOME_FILIAL}
+            <option id={op.cod_filial} key={op.cod_filial}>
+              {op.nome_filial}
             </option>
           ))}
         </select>
         <br></br>
         <br></br>
         <br></br>
-        <button>Criar Card</button>
+        <button type="submit">Criar Card</button>
       </form>
     </section>
   );
