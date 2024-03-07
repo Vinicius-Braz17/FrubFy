@@ -111,10 +111,11 @@ function CriarCard({ fecharPainel, BD }) {
   }
 
   function submit(e) {
+    e.preventDefault()
     inserirCardBD();
   }
 
-  async function inserirCardBD(newCard) {
+  async function inserirCardBD() {
     // Função para inserir cards no banco de dados
     const { data } = await sp.from('candidatos').insert(c)
     console.log(data);
