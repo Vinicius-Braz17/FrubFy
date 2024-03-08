@@ -68,31 +68,32 @@
   background-color: rgb(226, 226, 226);
 }
 
-.criarCard form .buttonSubmit button {
-  height: 30px;
-  width: 100px;
+section form .buttonSubmit .atualizarCard {
+  height: 37px;
+  width: 120px;
   margin: 28px 15px;
-  font-size: 11px;
+  font-size: 14px;
+  font-weight: 100;
   background-color: rgb(255, 255, 255);
-  border: 2px solid rgb(163, 51, 255);
+  border: 2px solid rgb(184, 97, 255);
   position: relative;
   z-index: 1;
-  transition: all 0.2s;
+  transition: all 0.3s;
   cursor: pointer;
 }
 
-.criarCard form .buttonSubmit button:hover {
+section form .buttonSubmit .atualizarCard:hover {
   background-color: rgb(184, 97, 255);
 }
 
-.criarCard form .buttonSubmit .faseAnterior {
+section form .buttonSubmit .faseAnterior {
   position: relative;
   z-index: 1;
   overflow: hidden;
-  border: 2px solid rgb(255, 80, 80);
+  border: 2px solid rgb(255, 80, 80); 
 }
 
-.criarCard form .buttonSubmit .faseAnterior::after {
+section form .buttonSubmit .faseAnterior::after {
   content: "<";
   position: absolute;
   top: 0;
@@ -101,29 +102,35 @@
   display: block;
   background-color: rgb(255, 80, 80);
   width: 100%;
-  height: 100%;
-  font-size: 25px;
+  padding: 5px 0;
+  font-size: 20px;
   transition: all 0.2s;
 }
 
-.criarCard form .buttonSubmit .faseAnterior:hover {
+section form .buttonSubmit .faseAnterior:hover {
   background-color: white;
 }
 
-.criarCard form .buttonSubmit .faseAnterior:hover::after {
+section form .buttonSubmit .faseAnterior:hover::after {
   right: 0;
   color: black;
   z-index: 1;
 }
 
-.criarCard form .buttonSubmit .fasePosterior {
+section form .buttonSubmit .fasePosterior {
   position: relative;
   z-index: 1;
+  background-color: white;
   overflow: hidden;
   border: 2px solid rgb(33, 255, 44);
+  font-size: 14px;
+  font-weight: 100;
+  height: 37px;
+  width: 120px;
+  border-radius: 15px;
 }
 
-.criarCard form .buttonSubmit .fasePosterior::after {
+section form .buttonSubmit .fasePosterior::after {
   content: ">";
   position: absolute;
   top: 0;
@@ -132,49 +139,36 @@
   display: block;
   background-color: rgb(33, 255, 44);
   width: 100%;
-  height: 100%;
-  font-size: 25px;
+  padding: 5px 0;
+  font-size: 20px;
   transition: all 0.2s;
 }
 
-.criarCard form .buttonSubmit .fasePosterior:hover {
+section form .buttonSubmit .fasePosterior:hover {
   background-color: white;
+  transform: translate(15px, 0);
+  box-shadow: -10px 0 7px rgb(201, 201, 201);
 }
 
-.criarCard form .buttonSubmit .fasePosterior:hover::after {
+section form .buttonSubmit .fasePosterior:hover::after {
   left: 0;
   color: black;
   z-index: 1;
 }
 
-/* .criarCard form div .escala {
-    width: 37.5%;
-    margin: 0px 10px;
-} */
-
-.criarCard form div .escalaDia {
-  width: 38.6%;
-  margin: 0px 12px;
-}
-
-.criarCard form .divEscala {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.criarCard form .declinio {
+section form .declinio {
     display: flex;
     justify-content: center;
 }
 
-.criarCard form .declinio input {
+section form .declinio input {
   width: 20px;
   margin: 0 5px;
   height: 20px;
+  cursor: pointer;
 }
 
-.criarCard form .declinio label {
+section form .declinio label {
   height: 25px;
   margin: 0 5px;
   padding: 7px 0;
@@ -182,55 +176,12 @@
   text-align: left;
 }
 
-.criarCard form .excluirCard button {
+section form .excluirCard button {
   border: none;
   width: 120px;
-  height: 25px;
+  height: 35px;
   border-radius: 10px;
-  background-color: rgb(255, 49, 49);
+  background-color: rgb(255, 72, 72);
   color: white;
   cursor: pointer;
-}
-
-.criarCard form {
-  text-align: center;
-  padding: 35px 0;
-  overflow: hidden;
-  height: 89%;
-  overflow-y: scroll;
-}
-
-.criarCard form input,
-select {
-  border-radius: 15px;
-  padding: 0 5px;
-  margin: 0;
-  width: 65%;
-  font-size: 17px;
-  height: 40px;
-  border: 1px solid black;
-}
-.criarCard form select {
-  width: 66%;
-}
-
-.criarCard form p {
-  font-size: 17px;
-  text-align: left;
-  margin: 5px auto;
-  width: 65%;
-}
-
-.criarCard form div {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 68%;
-  margin: 10px auto;
-}
-
-.criarCard form div * {
-  width: 65%;
-  margin: 0 20px;
-  height: 35px;
 }

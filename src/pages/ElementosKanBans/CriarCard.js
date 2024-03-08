@@ -71,7 +71,6 @@ function CriarCard({ fecharPainel, BD }) {
   //     .then((data) => {
   //       setCargos(data);
   //     })
-  //     .catch((err) => console.log(err));
   // }, []);
 
   function preencherDepartamentos(e) {
@@ -83,7 +82,6 @@ function CriarCard({ fecharPainel, BD }) {
         break;
       } 
     }
-    console.log(c);
   }
 
   // function preencherFuncao() {
@@ -93,15 +91,11 @@ function CriarCard({ fecharPainel, BD }) {
 
   //   setC({ ...c, funcao: opcaoSelecionada });
 
-  //   console.log(c);
   // }
 
   function HandleSelectChange(e) {
-    console.log(e.target.value);
-    console.log(e.target.name);
 
     setC({...c, [e.target.name]: e.target.value });
-    console.log(c);
   }
 
   function ToUpperCase(e) {
@@ -117,12 +111,15 @@ function CriarCard({ fecharPainel, BD }) {
   async function inserirCardBD() {
     // Função para inserir cards no banco de dados
     const { data } = await sp.from('candidatos').insert(c)
-    console.log(data);
   }
 
   function HandleChange(e) {
-    setC({ ...c, [e.target.name]: e.target.value });
-    console.log(c);
+    if (e.target.name === 'nome') {
+      let valor = e.target.value.toUpperCase()
+      setC({ ...c, [e.target.name]: valor });
+    } else {
+      setC({ ...c, [e.target.name]: e.target.value });
+    }
   }
 
   return (
@@ -142,7 +139,8 @@ function CriarCard({ fecharPainel, BD }) {
           onKeyUp={ToUpperCase}
           type="text"
           placeholder="Digite o nome do candidato" /*onChange={HandleChange}*/
-        />{" "}
+          onChange={HandleChange}
+            />{" "}
         <br></br>
         <br></br>
         <p>Email: </p>
@@ -154,7 +152,8 @@ function CriarCard({ fecharPainel, BD }) {
           onKeyUp={ToUpperCase}
           type="email"
           placeholder="Digite o email do candidato"
-        />{" "}
+          onChange={HandleChange}
+            />{" "}
         <br></br>
         <br></br>
         <p>Telefone: </p>
@@ -165,6 +164,7 @@ function CriarCard({ fecharPainel, BD }) {
           maxLength="15"
           name="telefone"
           onChange={HandleChange}
+          onKeyUp={HandleChange}
           placeholder="Digite o numero de telefone do candidato"
         />{" "}
         <br></br>
@@ -174,6 +174,7 @@ function CriarCard({ fecharPainel, BD }) {
           name="funcao"
           required
           onChange={preencherDepartamentos}
+          onClick={preencherDepartamentos}
           id="funcao"
         >
           <option></option>
@@ -204,6 +205,7 @@ function CriarCard({ fecharPainel, BD }) {
           autoComplete="off"
           name="salario"
           onChange={HandleChange}
+          onKeyUp={HandleChange}
           placeholder="Digite o salário do candidato"
         />{" "}
         <br></br>
@@ -248,7 +250,8 @@ function CriarCard({ fecharPainel, BD }) {
             autoComplete="off"
             name="horario_inicio"
             onChange={HandleChange}
-          />
+            onKeyUp={HandleChange}
+            />
           -
           <input
             type="time"
@@ -257,7 +260,8 @@ function CriarCard({ fecharPainel, BD }) {
             autoComplete="off"
             name="horario_fim"
             onChange={HandleChange}
-          />
+            onKeyUp={HandleChange}
+            />
         </div>
         <br></br>
         <p>Filial: </p>
