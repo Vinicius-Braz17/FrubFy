@@ -68,11 +68,15 @@
   background-color: rgb(226, 226, 226);
 }
 
+section form .buttonSubmit {
+  width: fit-content
+}
+
 section form .buttonSubmit .atualizarCard {
   height: 37px;
   width: 120px;
+  font-size: 13px;
   margin: 28px 15px;
-  font-size: 14px;
   font-weight: 100;
   background-color: rgb(255, 255, 255);
   border: 2px solid rgb(184, 97, 255);
@@ -80,6 +84,7 @@ section form .buttonSubmit .atualizarCard {
   z-index: 1;
   transition: all 0.3s;
   cursor: pointer;
+  border-radius: 15px;
 }
 
 section form .buttonSubmit .atualizarCard:hover {
@@ -89,8 +94,14 @@ section form .buttonSubmit .atualizarCard:hover {
 section form .buttonSubmit .faseAnterior {
   position: relative;
   z-index: 1;
+  background-color: white;
   overflow: hidden;
-  border: 2px solid rgb(255, 80, 80); 
+  border: 2px solid rgb(255, 33, 33);
+  font-size: 13px;
+  font-weight: 100;
+  height: 37px;
+  width: 120px;
+  border-radius: 15px;
 }
 
 section form .buttonSubmit .faseAnterior::after {
@@ -123,7 +134,7 @@ section form .buttonSubmit .fasePosterior {
   background-color: white;
   overflow: hidden;
   border: 2px solid rgb(33, 255, 44);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 100;
   height: 37px;
   width: 120px;

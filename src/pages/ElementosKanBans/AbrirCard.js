@@ -96,6 +96,34 @@ function AbrirCard({ fecharPainel, col }) {
     await sp.from('candidatos').update(c).eq('id_candidato', id)
   }
 
+  async function removerCard() {
+    let id = c.id_candidato
+    await sp.from('candidatos').delete().eq('id_candidato', id)
+  }
+  
+  
+  async function moverFase(e) {
+    let newFase = c;
+    let id = c.id_candidato
+    
+    // e.preventDefault()
+    switch (e.target.name) {
+      case "nextFase":
+          newFase.fase += 1;
+        break;
+      case 'previousFase':
+        newFase.fase -= 1;
+        break;
+        default:
+          break;
+      }
+
+    delete newFase.id_candidato
+    console.log(newFase);
+    await sp.from('candidatos').update(newFase).eq('id_candidato', id)
+    
+  }
+
 
   return (
     <section className={sReap.criarCard}>
@@ -302,7 +330,8 @@ function AbrirCard({ fecharPainel, col }) {
             ) : (
               <button
                 className={s.faseAnterior}
-                /*onClick={() => moverFase(0, c)}*/
+                name='previousFase'
+                onClick={moverFase}
               >
                 Fase anterior
               </button>
@@ -315,7 +344,8 @@ function AbrirCard({ fecharPainel, col }) {
             </button>
             <button
               className={s.fasePosterior}
-              /*onClick={() => moverFase(1, c)}*/
+              name='nextFase'
+              onClick={moverFase}
             >
               Próxima fase
             </button>
@@ -326,7 +356,7 @@ function AbrirCard({ fecharPainel, col }) {
             <label>Candidato declinou?</label>
           </div>
           <div className={s.excluirCard}>
-            <button /*onClick={removerCard}*/>Excluir card</button>
+            <button onClick={removerCard}>Excluir card</button>
           </div>
         </form>
       </>

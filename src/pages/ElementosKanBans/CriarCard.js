@@ -38,7 +38,7 @@ function CriarCard({ fecharPainel, BD }) {
     },
   ];
   
-  const [c, setC] = useState({fase: 1, cod_admissao: BD});
+  const [c, setC] = useState({fase: 1, cod_admissao: BD, processo_exame: 0});
   console.log(c);
   
   const [cargos, setCargos] = useState([]);
@@ -112,7 +112,8 @@ function CriarCard({ fecharPainel, BD }) {
 
   async function inserirCardBD(e) {
     // Função para inserir cards no banco de dados
-    e.preventDefault()
+    // e.preventDefault()
+    console.log(c);
     await sp.from('candidatos').insert(c)
   }
 

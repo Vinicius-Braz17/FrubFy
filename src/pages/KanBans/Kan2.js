@@ -1,37 +1,30 @@
 import Navegacao from "../PagHome/Navegacao"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Card from "../ElementosKanBans/Card"
 import ColunaKanBan from "../ElementosKanBans/ColunaKanBan"
-import { useEffect } from "react"
 import s from './Kan1.module.css'
 import AbrirCardSaude from "../ElementosKanBans/AbrirCardSaude"
 import e from  "../ElementosKanBans/ColunaKanBan.module.css"
-
+import sp from "../../Supabase"
 
 function Kan2({tipoKanBan, BD}) {
 
-    const [KanB, setKanB] = useState([])
-
-    useEffect(  
-        () => {
-            fetch(`http://localhost:4500${BD.DIRETORIO_SAUDE}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-         .then((resp) => resp.json())
-        .then((data) => {
-        setKanB(data)
-    })
-    .catch((err) => console.log(err))
-        },[BD]
-    )
-
     const [visualizacao, setVisualizacao] = useState()
+    const [colaboradores, setColaboradores] = useState()
+    
+    async function getCandidatos() {
+        const { data } = await sp.from('candidatos').select().eq('cod_admissao', BD.cod_admissao)
+        setColaboradores(data)
+    }
 
-    function abrirVisualizacao(e, i) {
-        setVisualizacao(<AbrirCardSaude fecharPainel={fecharVisualizacao} nome={e} Id={i} BD={KanB} paht={BD.DIRETORIO_ADM} pahtSaude={BD}/>)
+    useEffect(() => {
+        getCandidatos()
+    // eslint-disable-next-line
+    }, [])
+    
+    
+    function abrirVisualizacao(i) {
+        setVisualizacao(<AbrirCardSaude fecharPainel={fecharVisualizacao} col={i} />)
     }
 
     function fecharVisualizacao() {
@@ -39,7 +32,7 @@ function Kan2({tipoKanBan, BD}) {
     }
 
 
-    var coluna1 = <ColunaKanBan color={e.colK2} nome={"Cadastro e agendamento"}/>;
+    var coluna1 = <ColunaKanBan color={e.colK2} nome={"Cadastro e agendamento"} />;
     var coluna2 = <ColunaKanBan color={e.colK2} nome={"Envio Guia de exame médico"}/>;
     var coluna3 = <ColunaKanBan color={e.colK2} nome={"Realização do exame"}/>;
     var coluna4 = <ColunaKanBan color={e.colK2} nome={"Aprovados (Aptos)"}/>;
@@ -54,33 +47,115 @@ function Kan2({tipoKanBan, BD}) {
         var C5 = []
         var C6 = []
 
-        for (let i = 0; i < KanB.length; i++) {
-            if (KanB[i].fase === 1) {
-                C.push(<Card nomeC={KanB[i].nome} funcao={KanB[i].funcao} telefone={KanB[i].telefone} filial={KanB[i].filial} abrir={() => abrirVisualizacao(KanB[i].nome, KanB[i].id)}/>)
-                coluna1 = <ColunaKanBan color={e.colK2} nome={"Cadastro e agendamento SOC"}  Cards={C}/>
-            }  
-            else if (KanB[i].fase === 2) {
-                C2.push(<Card nomeC={KanB[i].nome} funcao={KanB[i].funcao} telefone={KanB[i].telefone} filial={KanB[i].filial} abrir={() => abrirVisualizacao(KanB[i].nome, KanB[i].id)}/>)
-                coluna2 = <ColunaKanBan color={e.colK2} nome={"Envio Guia de exame médico"}  Cards={C2}/>
+        try {
+           for (let i = 0; i < colaboradores.length; i++) {
+            if (colaboradores[i].fase === 1) {
+                C.push(
+                  <Card
+                    abrir={() => {
+                      abrirVisualizacao(colaboradores[i]);
+                    }}
+                    col={colaboradores[i]}
+                  />
+                );
+                coluna1 = (
+                  <ColunaKanBan
+                    nome={"Cadastro e agendamento"}
+                    color={e.colK2}
+                    Cards={C}
+                  />
+                );
+              } 
+            else if (colaboradores[i].fase === 2) {
+                C2.push(
+                    <Card
+                      abrir={() => {
+                        abrirVisualizacao(colaboradores[i]);
+                      }}
+                      col={colaboradores[i]}
+                    />
+                  );
+                  coluna2 = (
+                    <ColunaKanBan
+                      nome={"Envio Guia de exame médico"}
+                      color={e.colK2}
+                      Cards={C2}
+                    />
+                  );
             }
-            else if (KanB[i].fase === 3) {
-                C3.push(<Card nomeC={KanB[i].nome} funcao={KanB[i].funcao} telefone={KanB[i].telefone} filial={KanB[i].filial} abrir={() => abrirVisualizacao(KanB[i].nome, KanB[i].id)}/>)
-                coluna3 = <ColunaKanBan color={e.colK2} nome={"Realização do exame"}  Cards={C3}/>
+            else if (colaboradores[i].fase === 3) {
+                C3.push(
+                    <Card
+                      abrir={() => {
+                        abrirVisualizacao(colaboradores[i]);
+                      }}
+                      col={colaboradores[i]}
+                    />
+                  );
+                  coluna3 = (
+                    <ColunaKanBan
+                      nome={"Realização do exame"}
+                      color={e.colK2}
+                      Cards={C3}
+                    />
+                  );
             }
-            else if (KanB[i].fase === 4) {
-                C4.push(<Card nomeC={KanB[i].nome} funcao={KanB[i].funcao} telefone={KanB[i].telefone} filial={KanB[i].filial} abrir={() => abrirVisualizacao(KanB[i].nome, KanB[i].id)}/>)
-                coluna4 = <ColunaKanBan color={e.colK2} nome={"Aprovados (Aptos)"}  Cards={C4}/>
+            else if (colaboradores[i].fase === 4) {
+                C4.push(
+                    <Card
+                      abrir={() => {
+                        abrirVisualizacao(colaboradores[i]);
+                      }}
+                      col={colaboradores[i]}
+                    />
+                  );
+                  coluna4 = (
+                    <ColunaKanBan
+                      nome={"Aprovados (Aptos)"}
+                      color={e.colK2}
+                      Cards={C4}
+                    />
+                  );
             }
-            else if (KanB[i].fase === 5) {
-                C5.push(<Card nomeC={KanB[i].nome} funcao={KanB[i].funcao} telefone={KanB[i].telefone} filial={KanB[i].filial} abrir={() => abrirVisualizacao(KanB[i].nome, KanB[i].id)}/>)
-                coluna5 = <ColunaKanBan color={e.colK2} nome={"Reprovados (Inaptos)"}  Cards={C5}/>
+            else if (colaboradores[i].fase === 5) {
+                C5.push(
+                    <Card
+                      abrir={() => {
+                        abrirVisualizacao(colaboradores[i]);
+                      }}
+                      col={colaboradores[i]}
+                    />
+                  );
+                  coluna5 = (
+                    <ColunaKanBan
+                      nome={"Reprovados (Inaptos)"}
+                      color={e.colK2}
+                      Cards={C5}
+                    />
+                  );
             }
-            else if (KanB[i].fase === 6) {
-                C6.push(<Card nomeC={KanB[i].nome} funcao={KanB[i].funcao} telefone={KanB[i].telefone} filial={KanB[i].filial} abrir={() => abrirVisualizacao(KanB[i].nome, KanB[i].id)}/>)
-                coluna6 = <ColunaKanBan color={e.colK2} nome={"Declinios"}  Cards={C6}/>
+            else if (colaboradores[i].fase === 6) {
+                C6.push(
+                    <Card
+                      abrir={() => {
+                        abrirVisualizacao(colaboradores[i]);
+                      }}
+                      col={colaboradores[i]}
+                    />
+                  );
+                  coluna6 = (
+                    <ColunaKanBan
+                      nome={"Declinios"}
+                      color={e.colK2}
+                      Cards={C6}
+                    />
+                  );
             }
-        
+        } 
+    } catch (error) {
+        // Don't do nothing, just wait for the API to get the data on the server
     }
+        
 }
 
 showKB()

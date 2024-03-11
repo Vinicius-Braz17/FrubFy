@@ -44,6 +44,14 @@
 
 .card h1 b, .card p b {
     background-color: rgb(238, 238, 238);
+    max-width: 90%;
+}
+
+.card p {
+    max-width: 95%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; 
 }
 
 .card .vizualizar {

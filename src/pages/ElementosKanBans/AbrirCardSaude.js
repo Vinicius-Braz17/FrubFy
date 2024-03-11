@@ -1,363 +1,210 @@
-import s from "./AbrirCardSaude.module.css";
-import { useEffect, useState } from "react";
+import sReap from "./CriarCard.module.css";
+import s from "./AbrirCard.module.css";
+import sp from "../../Supabase";
 
-function AbrirCardSaude({ fecharPainel, BD, nome, Id, paht, pahtSaude }) {
+export default function AbrirCardSaude({ fecharPainel, col }) {
+  const colaborador = col;
+  console.log(colaborador);
 
-  const [KanB] = useState(BD || {});
-
-  let colaborador = {};
-
-  function renderizar() {
-    let index = findIndex(KanB, Id);
-
-    colaborador = KanB[index];
+  async function funcaoAtualizarCard(e) {
+    // e.preventDefault()
+    let id = colaborador.id_candidato;
+    delete colaborador.id_candidato;
+    await sp.from("candidatos").update(colaborador).eq("id_candidato", id);
   }
 
-  renderizar();
+  async function removerCard() {
+    let id = colaborador.id_candidato;
+    await sp.from("candidatos").delete().eq("id_candidato", id);
+  }
 
-  const [c, setC] = useState(colaborador);
-  const [cargos, setCargos] = useState([]);
-  const [filiais, setFiliais] = useState([]);
+  async function moverFase(e) {
+    let newFase = colaborador;
+    let id = colaborador.id_candidato;
 
-  useEffect(() => {
-    fetch("http://localhost:4500/cargos", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setCargos(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    fetch("http://localhost:4500/filiais", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setFiliais(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  function preencherDepartamentos() {
-    var opcaoSelecionada = document.querySelector("#funcao").value;
-
-    for (let i = 0; i < cargos.length; i++) {
-      if (opcaoSelecionada === cargos[i].nome) {
-        document.querySelector("#departamento").value = cargos[i].departamento;
-        setC({ ...c, departamento: cargos[i].departamento });
-      }
+    // e.preventDefault()
+    switch (e.target.name) {
+      case "nextFase":
+        newFase.fase += 1;
+        break;
+      case "previousFase":
+        newFase.fase -= 1;
+        break;
+      default:
+        break;
     }
-  }
 
-  function ToUpperCase(e) {
-    var textoInserido = document.querySelector("#INP").value;
-    document.querySelector("#INP").value = textoInserido.toUpperCase();
-    HandleChange(e);
-  }
-
-  function HandleSelectChange(e) {
-    var opcaoSelecionada = document.getElementById(e.target.name).value;
-
-    setC({ ...c, [e.target.name]: opcaoSelecionada });
-    console.log(c);
-  }
-
-  function HandleChange(e) {
-    setC({ ...c, [e.target.name]: e.target.value });
-    console.log(c);
-  }
-
-  function preencherFuncao() {
-    var opcaoSelecionada = document.querySelector("#funcao").value;
-
-    preencherDepartamentos();
-
-    setC({ ...c, funcao: opcaoSelecionada });
-
-    console.log(c);
-  }
-
-  function findIndex(e, n) {
-    for (let i = 0; i < e.length; i++) {
-      if (e[i].id === n) {
-        return i;
-      }
-    }
-  }
-
-  function atualizarCard(cardAtualizado) {
-    fetch(`http://localhost:4500${pahtSaude}/${Id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cardAtualizado),
-    })
-      .then((resp) => resp.json())
-      .catch((err) => console.log(err));
-
-      var CS = {
-        nome: cardAtualizado.nome,
-        telefone: cardAtualizado.telefone,
-        departamento: cardAtualizado.departamento,
-        funcao: cardAtualizado.funcao,
-        salario: cardAtualizado.salario,
-        diaInicio: cardAtualizado.diaInicio,
-        diaFim: cardAtualizado.diaFim,
-        escalaInicio: cardAtualizado.escalaInicio,
-        escalaFim: cardAtualizado.escalaFim,
-        filial: cardAtualizado.filial,
-        id: cardAtualizado.id,
-      }
-
-      fetch(`http://localhost:4500${paht}/${Id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(CS),
-    })
-      .then((resp) => resp.json())
-      .catch((err) => console.log(err));
-  
-
-    let APTO = document.querySelector("#apto");
-
-    if (APTO !== null && APTO.checked) {
-      cardAtualizado.fase++;
-
-      fetch(`http://localhost:4500${pahtSaude}/${Id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(cardAtualizado),
-      })
-        .then((resp) => resp.json())
-        .catch((err) => console.log(err));
-    }
-  }
-
-  function moverFase(direcao, cardAtualizado) {
-    if (cardAtualizado.fase === 4 || cardAtualizado.fase === 5) {
-      alert("Você não pode mover cards concluídos, apenas atualizá-los");
-    } else {
-      if (cardAtualizado.fase === 6) {
-        alert("Você não pode mover cards declinados");
-      } else {
-        if (direcao === 1) {
-          let APTO = document.querySelector("#apto");
-
-          if ((APTO !== null && APTO.checked) || colaborador.fase < 3) {
-            cardAtualizado.fase++;
-
-            fetch(`http://localhost:4500${pahtSaude}/${Id}`, {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(cardAtualizado),
-            })
-              .then((resp) => resp.json())
-              .catch((err) => console.log(err));
-          } else {
-            cardAtualizado.fase += 2;
-
-            fetch(`http://localhost:4500${pahtSaude}/${Id}`, {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(cardAtualizado),
-            })
-              .then((resp) => resp.json())
-              .catch((err) => console.log(err));
-          }
-        } else {
-          cardAtualizado.fase--;
-
-          fetch(`http://localhost:4500${pahtSaude}/${Id}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(cardAtualizado),
-          })
-            .then((resp) => resp.json())
-            .catch((err) => console.log(err));
-        }
-      }
-    }
+    delete newFase.id_candidato;
+    console.log(newFase);
+    await sp.from("candidatos").update(newFase).eq("id_candidato", id);
   }
 
   return (
-    <section className={s.criarCard}>
-      <h1>{nome}</h1>
-      <button id={s.botaoX} onClick={fecharPainel}>
-        X
-      </button>
+    <section className={sReap.criarCard}>
+      <>
+        <h1>{colaborador.nome}</h1>
+        <button id={s.botaoX} onClick={fecharPainel}>
+          X
+        </button>
 
-      <form>
-        <div>
+        <form>
           <p>Nome: </p>
           <input
             id="INP"
             required
-            autoComplete="off"
             name="nome"
+            readOnly
             defaultValue={colaborador.nome}
-            onKeyUp={ToUpperCase}
             type="text"
-            placeholder="Digite o nome do candidato" /*onChange={HandleChange}*/
-          />
-        </div>
-
-        <div>
+          />{" "}
+          <br></br>
+          <br></br>
+          <p>Email: </p>
+          <input
+            id="INP"
+            required
+            defaultValue={colaborador.email}
+            readOnly
+            name="email"
+            type="email"
+          />{" "}
+          <br></br>
+          <br></br>
           <p>Telefone: </p>
           <input
             type="text"
             required
-            autoComplete="off"
-            maxLength="15"
-            name="telefone"
-            onChange={HandleChange}
             defaultValue={colaborador.telefone}
-            placeholder="Digite o numero de telefone do candidato"
-          />
-        </div>
-
-        <div>
+            readOnly
+            name="telefone"
+          />{" "}
+          <br></br>
+          <br></br>
           <p>Cargo: </p>
-          <select
+          <input
             name="funcao"
-            defaultValue={colaborador.funcao}
             required
-            onClick={preencherDepartamentos}
-            onKeyUp={preencherDepartamentos}
-            onChange={preencherFuncao}
-            id="funcao"
-          >
-            {cargos.map((op) => {
-              if (op.nome === colaborador.funcao) {
-                return (
-                  <option id={op.nome} key={op.id} selected>
-                    {op.nome}
-                  </option>
-                );
-              } else {
-                return (
-                  <option id={op.nome} key={op.id}>
-                    {op.nome}
-                  </option>
-                );
-              }
-            })}
-          </select>
-        </div>
-
-        <div>
+            type="text"
+            defaultValue={colaborador.cargo}
+            readOnly
+            id="cargo"
+          ></input>
+          <br></br>
+          <br></br>
           <p>Departamento: </p>
           <input
             type="text"
             required
             id="departamento"
             name="departamento"
-            onKeyUp={HandleChange}
-            className={s.departamento}
             defaultValue={colaborador.departamento}
-            placeholder="Campo preenchido automaticamente"
+            className={s.departamento}
             readOnly
-          />
-        </div>
-
-        <div>
+          />{" "}
+          <br></br>
+          <br></br>
+          <p>Escala: </p>
+          <div>
+            <input
+              name="dia_inicio"
+              id="diaInicio"
+              type="text"
+              className={s.escalaDia}
+              defaultValue={colaborador.dia_inicio}
+              required
+              readOnly
+            ></input>
+            -
+            <input
+              name="dia_fim"
+              id="diaFim"
+              type="text"
+              className={s.escalaDia}
+              defaultValue={colaborador.dia_fim}
+              required
+              readOnly
+            ></input>
+          </div>
+          <div>
+            <input
+              type="time"
+              required
+              className={s.escala}
+              readOnly
+              defaultValue={colaborador.horario_inicio}
+              name="horario_inicio"
+            />
+            -
+            <input
+              type="time"
+              required
+              className={s.escala}
+              readOnly
+              defaultValue={colaborador.horario_fim}
+              name="horario_fim"
+            />
+          </div>
+          <br></br>
           <p>Filial: </p>
-          <select
+          <input
             name="filial"
             required
             id="filial"
-            onChange={HandleSelectChange}
-          >
-            {filiais.map((op) => {
-              if (op.nome === colaborador.filial) {
-                return (
-                  <option id={op.nome} key={op.id} selected>
-                    {op.nome}
-                  </option>
-                );
-              } else {
-                return (
-                  <option id={op.nome} key={op.id}>
-                    {op.nome}
-                  </option>
-                );
-              }
-            })}
-          </select>
-        </div>
-
-        <div className={s.dataExame}>
-          <p>Data do exame:</p>
-          <input
-            type="date"
-            name="dataExame"
-            defaultValue={colaborador.dataExame}
-            onChange={HandleChange}
-          />
-        </div>
-
-        <div className={s.dataExame}>
-          <p>Horário do exame:</p>
-          <input
-            type="time"
-            name="horarioExame"
-            defaultValue={colaborador.horarioExame}
-            onChange={HandleChange}
-          />
-        </div>
-
-        <div className={s.dataExame}>
-          <p>Clínica:</p>
-          <input
             type="text"
-            name="clinica"
-            defaultValue={colaborador.clinica}
-            autoComplete="off"
-            onChange={HandleChange}
-          />
-        </div>
+            readOnly
+            defaultValue={colaborador.filial}
+          ></input>
+          <br></br>
+          <br></br>
+          {colaborador.fase >= 3 && (
+            <>
+              <p>Data do exame: </p>
+              <input type="date" />
+              <br></br>
+              <br></br>
+              <p>Horário do exame: </p>
+              <input type="time" />
+            </>
+          )}
+          <br></br>
+          <div className={s.buttonSubmit}>
+            {colaborador.fase === 1 ? (
+              <></>
+            ) : (
+              <button
+                className={s.faseAnterior}
+                name="previousFase"
+                onClick={moverFase}
+              >
+                Fase anterior
+              </button>
+            )}
 
-        {colaborador.fase === 3 && (
-          <div className={s.resultadoExame}>
-            <input type="checkbox" name="Status" id="apto" />
-            <label>Candidato apto no exame médico</label>
+            <button
+              className={s.atualizarCard}
+              type="submit"
+              onClick={funcaoAtualizarCard}
+            >
+              Atualizar card
+            </button>
+            <button
+              className={s.fasePosterior}
+              name="nextFase"
+              onClick={moverFase}
+            >
+              Próxima fase
+            </button>
           </div>
-        )}
-
-        <div className={s.buttonSubmit}>
-          {colaborador.fase === 1 ? (
-            <></>
-          ) : (
-          <button className={s.faseAnterior} onClick={() => moverFase(0, c)}>
-            Fase anterior
-          </button>)}
-          <button onClick={() => atualizarCard(c)}>Atualizar card</button>
-          <button className={s.fasePosterior} onClick={() => moverFase(1, c)}>
-            Próxima fase
-          </button>
-        </div>
-      </form>
+          <hr></hr>
+          <div className={s.declinio}>
+            <input type="checkbox" name="declinio?" id="declinio" />
+            <label>Candidato declinou?</label>
+          </div>
+          <div className={s.excluirCard}>
+            <button onClick={removerCard}>Excluir card</button>
+          </div>
+        </form>
+      </>
     </section>
   );
 }
-
-export default AbrirCardSaude;

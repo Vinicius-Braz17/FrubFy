@@ -1,4 +1,5 @@
-{
+
+  {
   "name": "frub-fy",
   "version": "0.1.0",
   "private": true,
@@ -44,3 +45,4 @@
     "tailwindcss": "^3.4.1"
   }
 }
+

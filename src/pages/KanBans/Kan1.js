@@ -30,13 +30,15 @@ function Kan1({ tipoKanBan, BD }) {
     <ColunaKanBan
       nome={"Triagem"}
       color={e.colK1}
-      botao={<button
-        title="Crie um novo card"
-        id="createCard"
-        onClick={abrirCriarCard}
-      >
-        +
-      </button>}
+      botao={
+        <button
+          title="Crie um novo card"
+          id="createCard"
+          onClick={abrirCriarCard}
+        >
+          +
+        </button>
+      }
     />
   );
   var coluna2 = <ColunaKanBan nome={"Primeira Etapa"} color={e.colK1} />;
@@ -113,7 +115,7 @@ function Kan1({ tipoKanBan, BD }) {
           );
           coluna3 = (
             <ColunaKanBan
-              nome={"Saúde e conta bancária"}
+              nome={"Exame médico admissional"}
               color={e.colK1}
               Cards={C3}
             />
@@ -128,7 +130,7 @@ function Kan1({ tipoKanBan, BD }) {
             />
           );
           coluna4 = (
-            <ColunaKanBan nome={"Segunda Etapa"} color={e.colK1} Cards={C4} />
+            <ColunaKanBan nome={"Etapa de documentações"} color={e.colK1} Cards={C4} />
           );
         } else if (colaboradores[i].fase === 5) {
           C5.push(
@@ -141,7 +143,7 @@ function Kan1({ tipoKanBan, BD }) {
           );
           coluna5 = (
             <ColunaKanBan
-              nome={"Conferência 2ª etapa"}
+              nome={"Verificações"}
               color={e.colK1}
               Cards={C5}
             />
@@ -189,7 +191,7 @@ function Kan1({ tipoKanBan, BD }) {
         }
       }
     } catch (error) {
-      /// Don't do nothing, just wait untill the app get the informations form the server
+          // Don't do nothing, just wait for the API to get the data on the server
     }
   }
 
