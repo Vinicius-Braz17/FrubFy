@@ -88,7 +88,8 @@ function AbrirCard({ fecharPainel, col }) {
     console.log(c);
   }
 
-  async function funcaoAtualizarCard() {
+  async function funcaoAtualizarCard(e) {
+    // e.preventDefault()
     let id = c.id_candidato
     delete c.id_candidato
     console.log(c);

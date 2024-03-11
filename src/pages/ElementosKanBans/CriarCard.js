@@ -105,13 +105,14 @@ function CriarCard({ fecharPainel, BD }) {
     HandleChange(e);
   }
 
-  function submit(e) {
-    // e.preventDefault();
-    inserirCardBD();
-  }
+  // function submit(e) {
+  //   e.preventDefault();
+  //   inserirCardBD();
+  // }
 
-  async function inserirCardBD() {
+  async function inserirCardBD(e) {
     // Função para inserir cards no banco de dados
+    e.preventDefault()
     await sp.from('candidatos').insert(c)
   }
 
@@ -131,7 +132,7 @@ function CriarCard({ fecharPainel, BD }) {
         X
       </button>
 
-      <form onSubmit={submit}>
+      <form onSubmit={inserirCardBD}>
         <p>Nome: </p>
         <input
           id="INP"
